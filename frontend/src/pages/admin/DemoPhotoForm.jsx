@@ -48,7 +48,7 @@ export default function DemoPhotoForm() {
       <h1 className="font-serif text-3xl text-charcoal mb-8">{isEdit ? "Edit Demo Photo" : "New Demo Photo"}</h1>
       <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
         <Field label="Photo">
-          <ImageUploader images={form.image ? [form.image] : []} onChange={(imgs) => set("image", imgs[0] || null)} multiple={false} folder="demo-photos" />
+          <ImageUploader images={form.image ? [form.image] : []} onChange={(imgs) => set("image", imgs[0] || null)} multiple={false} folder="demo-photos" editableAlt />
         </Field>
         <Field label="Room">
           <select data-testid="demo-photo-form-room" value={form.room} onChange={(e) => set("room", e.target.value)} className="input">

@@ -42,7 +42,11 @@ export function Lightbox({ photo, onClose, onPrev, onNext }) {
         </button>
       )}
       <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
-        <img src={resolveImageUrl(imageUrl)} alt={photo.caption || "Photo"} className="w-full max-h-[70vh] object-contain rounded-md" />
+        <img
+          src={resolveImageUrl(imageUrl)}
+          alt={photo.alt_text || photo.caption || photo.image?.alt_text || "Photo"}
+          className="w-full max-h-[70vh] object-contain rounded-md"
+        />
         {(photo.caption || photo.tiles?.length > 0) && (
           <div className="mt-4 bg-bone rounded-md p-4">
             {photo.caption && <p className="text-charcoal text-sm mb-2">{photo.caption}</p>}

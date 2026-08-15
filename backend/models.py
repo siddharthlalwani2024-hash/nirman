@@ -35,6 +35,12 @@ class ImageAsset(BaseModel):
     url: str
     thumb_url: str
     medium_url: str
+    alt_text: Optional[str] = ""
+
+
+class FeaturedTilesUpdate(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    tile_ids: List[str] = []
 
 
 class TileCreate(BaseModel):
@@ -49,6 +55,7 @@ class TileCreate(BaseModel):
     images: List[ImageAsset] = []
     featured: bool = False
     published: bool = True
+    is_kajaria: bool = True
 
 
 class TileUpdate(TileCreate):
@@ -91,6 +98,12 @@ class SiteSettingsUpdate(BaseModel):
     kajaria_dealer_badge: Optional[bool] = None
     social_links: Optional[dict] = None
     hero_images: Optional[List[str]] = None
+    logo_url: Optional[str] = None
+    showroom_building_photo: Optional[str] = None
+    premium_collections: Optional[List[dict]] = None
+    skus_stocked: Optional[int] = None
+    projects_completed: Optional[int] = None
+    warranty_years: Optional[int] = None
 
 
 class BlogCreate(BaseModel):

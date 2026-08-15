@@ -25,6 +25,11 @@ module.exports = {
         claydark: '#944C23',
         kajaria: '#15508B',
         wagreen: '#25D366',
+        cobalt: '#123B73',
+        cobaltdark: '#0D2C57',
+        skymist: '#DCE7F3',
+        ink: '#16202B',
+        mutedgrey: '#667180',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

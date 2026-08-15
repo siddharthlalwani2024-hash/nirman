@@ -47,9 +47,11 @@ export default function TileDetail() {
             {tile.images?.[activeIndex] && (
               <img
                 src={resolveImageUrl(tile.images[activeIndex].url)}
-                alt={`${tile.name} tile closeup`}
+                alt={tile.images[activeIndex].alt_text || `${tile.name} tile closeup`}
                 className="w-full h-full object-cover cursor-zoom-in"
-                onClick={() => setLightboxPhoto({ url: tile.images[activeIndex].url })}
+                onClick={() =>
+                  setLightboxPhoto({ url: tile.images[activeIndex].url, alt_text: tile.images[activeIndex].alt_text || `${tile.name} tile closeup` })
+                }
                 data-testid="tile-main-image"
               />
             )}
@@ -61,9 +63,9 @@ export default function TileDetail() {
                   key={img.id}
                   onClick={() => setActiveIndex(i)}
                   data-testid={`tile-thumbnail-${i}`}
-                  className={`w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 ${i === activeIndex ? "border-clay" : "border-transparent"}`}
+                  className={`w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 ${i === activeIndex ? "border-cobalt" : "border-transparent"}`}
                 >
-                  <img src={resolveImageUrl(img.thumb_url)} alt={`${tile.name} view ${i + 1}`} className="w-full h-full object-cover" />
+                  <img src={resolveImageUrl(img.thumb_url)} alt={img.alt_text || `${tile.name} view ${i + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -71,7 +73,10 @@ export default function TileDetail() {
         </div>
 
         <div>
-          <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-clay bg-clay/10 rounded-full px-3 py-1 mb-3">{tile.type}</span>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-cobalt bg-cobalt/10 rounded-full px-3 py-1">{tile.type}</span>
+            {tile.is_kajaria && <span className="inline-block text-[11px] font-semibold text-white bg-cobalt rounded-full px-3 py-1">Kajaria</span>}
+          </div>
           <h1 className="font-serif text-3xl sm:text-4xl text-charcoal mb-2" data-testid="tile-name">{tile.name}</h1>
           <p className="text-sm text-taupe mb-6" data-testid="tile-sku">SKU: {tile.sku}</p>
 
@@ -132,7 +137,12 @@ export default function TileDetail() {
                 data-testid={`tile-demo-photo-${photo.id}`}
                 className="aspect-[4/5] rounded-md overflow-hidden bg-greige"
               >
-                <img src={resolveImageUrl(photo.image.medium_url)} alt={photo.caption} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                <img
+                  src={resolveImageUrl(photo.image.medium_url)}
+                  alt={photo.image.alt_text || photo.caption}
+                  loading="lazy"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
               </button>
             ))}
           </div>

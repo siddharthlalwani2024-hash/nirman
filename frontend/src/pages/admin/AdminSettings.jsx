@@ -99,6 +99,61 @@ export default function AdminSettings() {
               folder="settings"
             />
           </Field>
+          <Field label="Logo">
+            <ImageUploader
+              images={settings.logo_url ? [{ url: settings.logo_url, thumb_url: settings.logo_url }] : []}
+              onChange={(imgs) => set("logo_url", imgs[0]?.url || "")}
+              multiple={false}
+              folder="settings"
+            />
+          </Field>
+          <Field label="Exhibition Centre / Building Photo">
+            <ImageUploader
+              images={settings.showroom_building_photo ? [{ url: settings.showroom_building_photo, thumb_url: settings.showroom_building_photo }] : []}
+              onChange={(imgs) => set("showroom_building_photo", imgs[0]?.url || "")}
+              multiple={false}
+              folder="settings"
+            />
+          </Field>
+          <Field label="Trust Stats: SKUs Stocked">
+            <input type="number" data-testid="settings-skus-stocked" className="input" value={settings.skus_stocked || 0} onChange={(e) => set("skus_stocked", Number(e.target.value))} />
+          </Field>
+          <Field label="Trust Stats: Projects Completed">
+            <input type="number" data-testid="settings-projects-completed" className="input" value={settings.projects_completed || 0} onChange={(e) => set("projects_completed", Number(e.target.value))} />
+          </Field>
+          <Field label="Trust Stats: Warranty Years">
+            <input type="number" data-testid="settings-warranty-years" className="input" value={settings.warranty_years || 0} onChange={(e) => set("warranty_years", Number(e.target.value))} />
+          </Field>
+          <Field label="Premium Kajaria Collections (name / tagline)">
+            <div className="space-y-3">
+              {(settings.premium_collections || []).map((c, i) => (
+                <div key={i} className="flex gap-2">
+                  <input
+                    className="input"
+                    placeholder="Collection name"
+                    value={c.name || ""}
+                    data-testid={`settings-collection-name-${i}`}
+                    onChange={(e) => {
+                      const next = [...(settings.premium_collections || [])];
+                      next[i] = { ...next[i], name: e.target.value };
+                      set("premium_collections", next);
+                    }}
+                  />
+                  <input
+                    className="input"
+                    placeholder="Tagline"
+                    value={c.tagline || ""}
+                    data-testid={`settings-collection-tagline-${i}`}
+                    onChange={(e) => {
+                      const next = [...(settings.premium_collections || [])];
+                      next[i] = { ...next[i], tagline: e.target.value };
+                      set("premium_collections", next);
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </Field>
           <Field label="About: Our Story">
             <textarea data-testid="settings-about-story" className="input" rows={4} value={settings.about_story || ""} onChange={(e) => set("about_story", e.target.value)} />
           </Field>

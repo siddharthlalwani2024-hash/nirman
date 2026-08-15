@@ -23,6 +23,7 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import TilesList from "./pages/admin/TilesList";
 import TileForm from "./pages/admin/TileForm";
+import FeaturedPicks from "./pages/admin/FeaturedPicks";
 import DemoPhotosList from "./pages/admin/DemoPhotosList";
 import DemoPhotoForm from "./pages/admin/DemoPhotoForm";
 import AdminSettings from "./pages/admin/AdminSettings";
@@ -61,6 +62,7 @@ function App() {
                   <Route path="tiles" element={<TilesList />} />
                   <Route path="tiles/new" element={<TileForm />} />
                   <Route path="tiles/:id/edit" element={<TileForm />} />
+                  <Route path="featured-picks" element={<FeaturedPicks />} />
                   <Route path="demo-photos" element={<DemoPhotosList />} />
                   <Route path="demo-photos/new" element={<DemoPhotoForm />} />
                   <Route path="demo-photos/:id/edit" element={<DemoPhotoForm />} />

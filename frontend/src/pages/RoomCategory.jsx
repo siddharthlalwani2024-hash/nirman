@@ -51,7 +51,12 @@ export default function RoomCategory() {
             {photos.map((photo) => (
               <div key={photo.id} data-testid={`room-look-card-${photo.id}`} className="bg-white/60 border border-greige rounded-md overflow-hidden flex flex-col sm:flex-row">
                 <button onClick={() => setLightboxPhoto(photo)} className="sm:w-1/2 aspect-[4/3] sm:aspect-auto shrink-0 overflow-hidden bg-greige">
-                  <img src={resolveImageUrl(photo.image.medium_url)} alt={photo.caption} loading="lazy" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+                  <img
+                    src={resolveImageUrl(photo.image.medium_url)}
+                    alt={photo.image.alt_text || photo.caption}
+                    loading="lazy"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
                 </button>
                 <div className="p-4 flex-1">
                   <p className="text-sm text-charcoal mb-3">{photo.caption}</p>

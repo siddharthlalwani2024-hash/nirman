@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Response
 from typing import List
@@ -21,7 +22,7 @@ async def upload_images(files: List[UploadFile] = File(...), folder: str = Form(
         if len(data) > MAX_SIZE:
             raise HTTPException(status_code=400, detail=f"{f.filename} exceeds 10MB limit")
         try:
-            processed = process_and_upload_image(data, folder)
+            processed = await asyncio.to_thread(process_and_upload_image, data, folder)
         except Exception as e:
             logger.error(f"Image processing failed for {f.filename}: {e}")
             raise HTTPException(status_code=500, detail="Image processing failed")
@@ -39,7 +40,8 @@ async def upload_images(files: List[UploadFile] = File(...), folder: str = Form(
 @router.get("/media/{path:path}")
 async def serve_media(path: str):
     try:
-        data, content_type = get_object(path)
-    except Exception:
+        data, content_type = await asyncio.to_thread(get_object, path)
+    except Exception as e:
+        logger.error(f"Media fetch failed for {path}: {e}")
         raise HTTPException(status_code=404, detail="Image not found")
     return Response(content=data, media_type=content_type or "image/webp", headers={"Cache-Control": "public, max-age=31536000, immutable"})

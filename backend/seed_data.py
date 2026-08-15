@@ -34,13 +34,14 @@ IMG = {
 }
 
 
-def image_asset(key: str) -> dict:
+def image_asset(key: str, alt: str = "") -> dict:
     base = f"https://images.unsplash.com/{IMG[key]}"
     return {
         "id": new_id(),
         "url": f"{base}?w=1600&q=80&auto=format&fit=crop",
         "medium_url": f"{base}?w=800&q=75&auto=format&fit=crop",
         "thumb_url": f"{base}?w=400&q=70&auto=format&fit=crop",
+        "alt_text": alt,
     }
 
 
@@ -127,6 +128,7 @@ async def seed_content(db):
         tiles = []
         for i, (name, sku, ttype, size, finish, rooms, featured) in enumerate(TILES_SPEC):
             img_key = TEXTURE_CYCLE[i % len(TEXTURE_CYCLE)]
+            alt = f"{name} {ttype} tile, {size}, {finish.lower()} finish"
             tiles.append(
                 {
                     "id": new_id(),
@@ -138,9 +140,10 @@ async def seed_content(db):
                     "finish": finish,
                     "rooms": rooms,
                     "description": f"{name} is a {finish.lower()}-finish {ttype} tile in {size}, suited for {', '.join(rooms)} spaces.",
-                    "images": [image_asset(img_key), image_asset(TEXTURE_CYCLE[(i + 1) % len(TEXTURE_CYCLE)])],
+                    "images": [image_asset(img_key, alt), image_asset(TEXTURE_CYCLE[(i + 1) % len(TEXTURE_CYCLE)], alt)],
                     "featured": featured,
                     "published": True,
+                    "is_kajaria": True,
                     "created_at": now_iso(),
                     "updated_at": now_iso(),
                 }
@@ -161,7 +164,7 @@ async def seed_content(db):
             photos.append(
                 {
                     "id": new_id(),
-                    "image": image_asset(img_key),
+                    "image": image_asset(img_key, caption),
                     "room": room,
                     "caption": caption,
                     "tile_ids": linked,
@@ -226,5 +229,15 @@ async def seed_content(db):
                 "about_why_us": "Every tile in our showroom is chosen for how it looks installed, not just how it looks on a shelf. We are an authorized Kajaria dealer, and our team helps you match the right tile to the right room — bathroom, kitchen, living, outdoor, wall or floor.",
                 "kajaria_dealer_badge": True,
                 "social_links": {"facebook": "", "instagram": ""},
+                "logo_url": "",
+                "showroom_building_photo": "",
+                "premium_collections": [
+                    {"name": "Eternity", "tagline": "Marble-look GVT for statement floors"},
+                    {"name": "Artstruct", "tagline": "Textured surfaces with architectural depth"},
+                    {"name": "Grescolour", "tagline": "Bold solid-tone GVT for modern spaces"},
+                ],
+                "skus_stocked": 300,
+                "projects_completed": 1200,
+                "warranty_years": 10,
             }
         )

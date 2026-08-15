@@ -3,7 +3,7 @@ import { Upload, X, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { api } from "../../lib/api";
 import { resolveImageUrl } from "../../lib/image";
 
-export function ImageUploader({ images = [], onChange, multiple = true, folder = "tiles" }) {
+export function ImageUploader({ images = [], onChange, multiple = true, folder = "tiles", editableAlt = false }) {
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef(null);
@@ -34,6 +34,11 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
     const target = i + dir;
     if (target < 0 || target >= next.length) return;
     [next[i], next[target]] = [next[target], next[i]];
+    onChange(next);
+  };
+  const updateAlt = (i, value) => {
+    const next = [...images];
+    next[i] = { ...next[i], alt_text: value };
     onChange(next);
   };
 
@@ -97,6 +102,24 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
                   </button>
                 </div>
               )}
+            </div>
+          ))}
+        </div>
+      )}
+      {editableAlt && images.length > 0 && (
+        <div className="mt-4 space-y-2">
+          <p className="text-xs text-taupe uppercase tracking-wide">Alt text (for SEO &amp; accessibility)</p>
+          {images.map((img, i) => (
+            <div key={img.id || i} className="flex items-center gap-2">
+              <span className="text-xs text-taupe w-14 shrink-0">Image {i + 1}</span>
+              <input
+                type="text"
+                placeholder="Describe this photo, e.g. Alpine White Marble tile on a bathroom wall"
+                value={img.alt_text || ""}
+                onChange={(e) => updateAlt(i, e.target.value)}
+                data-testid={`alt-text-input-${i}`}
+                className="input text-sm"
+              />
             </div>
           ))}
         </div>

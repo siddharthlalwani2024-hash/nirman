@@ -13,6 +13,8 @@ EMERGENT_KEY = os.environ.get("EMERGENT_LLM_KEY")
 APP_NAME = os.environ.get("APP_NAME", "nirman_udyog")
 
 _storage_key = None
+_object_cache = {}
+_CACHE_MAX_ITEMS = 1000
 
 
 def init_storage(force: bool = False):
@@ -46,13 +48,19 @@ def put_object(path: str, data: bytes, content_type: str) -> dict:
 
 
 def get_object(path: str):
+    cached = _object_cache.get(path)
+    if cached:
+        return cached
     key = init_storage()
     resp = requests.get(f"{STORAGE_URL}/objects/{path}", headers={"X-Storage-Key": key}, timeout=60)
     if resp.status_code == 404:
         key = init_storage(force=True)
         resp = requests.get(f"{STORAGE_URL}/objects/{path}", headers={"X-Storage-Key": key}, timeout=60)
     resp.raise_for_status()
-    return resp.content, resp.headers.get("Content-Type", "application/octet-stream")
+    result = (resp.content, resp.headers.get("Content-Type", "application/octet-stream"))
+    if len(_object_cache) < _CACHE_MAX_ITEMS:
+        _object_cache[path] = result
+    return result
 
 
 SIZES = {"thumb": 400, "medium": 800, "large": 1600}

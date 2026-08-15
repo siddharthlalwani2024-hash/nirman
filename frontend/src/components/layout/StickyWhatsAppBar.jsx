@@ -20,7 +20,7 @@ export function StickyWhatsAppBar() {
           target="_blank"
           rel="noreferrer"
           data-testid="sticky-whatsapp-button"
-          className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold py-3 rounded-full shadow-md hover:bg-[#20bd5a] transition-colors"
+          className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold py-3 rounded-full shadow-md border-2 border-cobalt hover:bg-[#20bd5a] transition-colors"
         >
           <MessageCircle size={20} /> {label}
         </a>

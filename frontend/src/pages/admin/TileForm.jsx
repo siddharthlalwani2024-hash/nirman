@@ -4,7 +4,7 @@ import { api } from "../../lib/api";
 import { ROOMS, TILE_TYPES } from "../../constants/rooms";
 import { ImageUploader } from "../../components/admin/ImageUploader";
 
-const empty = { name: "", sku: "", type: "GVT", size: "", finish: "", rooms: [], description: "", images: [], featured: false, published: true };
+const empty = { name: "", sku: "", type: "GVT", size: "", finish: "", rooms: [], description: "", images: [], featured: false, published: true, is_kajaria: true };
 
 export default function TileForm() {
   const { id } = useParams();
@@ -86,7 +86,7 @@ export default function TileForm() {
         </Field>
 
         <Field label="Images">
-          <ImageUploader images={form.images} onChange={(imgs) => set("images", imgs)} folder="tiles" />
+          <ImageUploader images={form.images} onChange={(imgs) => set("images", imgs)} folder="tiles" editableAlt />
         </Field>
 
         <div className="flex gap-6">
@@ -95,6 +95,9 @@ export default function TileForm() {
           </label>
           <label className="flex items-center gap-2 text-sm text-charcoal">
             <input type="checkbox" data-testid="tile-form-published" checked={form.published} onChange={(e) => set("published", e.target.checked)} /> Published
+          </label>
+          <label className="flex items-center gap-2 text-sm text-charcoal">
+            <input type="checkbox" data-testid="tile-form-is-kajaria" checked={form.is_kajaria} onChange={(e) => set("is_kajaria", e.target.checked)} /> Genuine Kajaria SKU
           </label>
         </div>
 

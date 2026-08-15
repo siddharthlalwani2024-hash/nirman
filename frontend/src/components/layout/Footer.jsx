@@ -8,7 +8,7 @@ export function Footer() {
   if (!settings) return null;
 
   return (
-    <footer className="bg-charcoal text-bone mt-20">
+    <footer className="bg-ink text-bone mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <div className="font-serif text-2xl mb-3">{settings.business_name || "Nirman Udyog"}</div>
@@ -19,7 +19,7 @@ export function Footer() {
           <ul className="space-y-2 text-sm">
             {ROOMS.map((r) => (
               <li key={r.slug}>
-                <Link to={`/tiles/${r.slug}`} className="hover:text-clay transition-colors" data-testid={`footer-room-${r.slug}`}>
+                <Link to={`/tiles/${r.slug}`} className="hover:text-sky-300 transition-colors" data-testid={`footer-room-${r.slug}`}>
                   {r.name} Tiles
                 </Link>
               </li>
@@ -45,18 +45,18 @@ export function Footer() {
         </div>
         <div>
           {settings.kajaria_dealer_badge && (
-            <div data-testid="footer-kajaria-badge" className="inline-flex items-center gap-2 bg-[#15508B] text-white rounded-md px-3 py-2 mb-5">
+            <div data-testid="footer-kajaria-badge" className="inline-flex items-center gap-2 bg-cobalt border border-white/15 rounded-md px-3 py-2 mb-5">
               <span className="text-xs font-semibold tracking-wide">AUTHORIZED KAJARIA DEALER</span>
             </div>
           )}
           <div className="flex gap-4">
             {settings.social_links?.facebook && (
-              <a href={settings.social_links.facebook} target="_blank" rel="noreferrer" data-testid="footer-facebook" className="text-bone/70 hover:text-bone">
+              <a href={settings.social_links.facebook} target="_blank" rel="noreferrer" data-testid="footer-facebook" className="text-bone/70 hover:text-sky-300 transition-colors">
                 <Facebook size={18} />
               </a>
             )}
             {settings.social_links?.instagram && (
-              <a href={settings.social_links.instagram} target="_blank" rel="noreferrer" data-testid="footer-instagram" className="text-bone/70 hover:text-bone">
+              <a href={settings.social_links.instagram} target="_blank" rel="noreferrer" data-testid="footer-instagram" className="text-bone/70 hover:text-sky-300 transition-colors">
                 <Instagram size={18} />
               </a>
             )}

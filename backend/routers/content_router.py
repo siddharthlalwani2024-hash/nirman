@@ -9,6 +9,7 @@ from models import (
     SiteSettingsUpdate,
     BlogCreate,
     BlogUpdate,
+    FeaturedTilesUpdate,
     ROOMS,
     ROOM_SLUGS,
     new_id,
@@ -103,6 +104,17 @@ async def update_tile(tile_id: str, payload: TileUpdate, user=Depends(get_curren
     update_data["updated_at"] = now_iso()
     await db.tiles.update_one({"id": tile_id}, {"$set": update_data})
     return _strip(await db.tiles.find_one({"id": tile_id}, {"_id": 0}))
+
+
+@router.put("/admin/tiles-featured")
+async def set_featured_tiles(payload: FeaturedTilesUpdate, user=Depends(get_current_user)):
+    from server import db
+
+    tile_ids = payload.tile_ids[:6]
+    await db.tiles.update_many({}, {"$set": {"featured": False}})
+    if tile_ids:
+        await db.tiles.update_many({"id": {"$in": tile_ids}}, {"$set": {"featured": True}})
+    return {"featured_ids": tile_ids}
 
 
 @router.delete("/admin/tiles/{tile_id}")
