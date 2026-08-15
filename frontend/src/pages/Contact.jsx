@@ -41,22 +41,26 @@ export default function Contact() {
               </a>
             </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 pt-4">
+          <div className="bg-canvasAlt border border-grout rounded-lg p-6 mt-2">
+            <p className="text-xs text-ink/60 uppercase tracking-wide mb-4">Prefer to just message us?</p>
             <a
               href={waLink}
               target="_blank"
               rel="noreferrer"
               data-testid="contact-whatsapp-cta"
-              className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold px-6 py-3.5 rounded-full hover:bg-[#20bd5a] transition-colors"
+              className="group flex items-center gap-3 bg-[#25D366] text-white font-semibold px-5 py-4 rounded-full shadow-lift hover:brightness-105 hover:scale-[1.01] active:scale-95 transition-all duration-200"
             >
-              <MessageCircle size={20} /> Message on WhatsApp
+              <span className="flex items-center justify-center w-9 h-9 rounded-full bg-white/15 shrink-0">
+                <MessageCircle size={18} />
+              </span>
+              Message on WhatsApp
             </a>
             <a
               href={`tel:${settings.phone}`}
               data-testid="contact-call-cta"
-              className="flex items-center justify-center gap-2 border border-clay text-clay font-medium px-6 py-3.5 rounded-full hover:bg-clay hover:text-canvas transition-colors"
+              className="flex items-center justify-center gap-2 text-sm text-ink/70 hover:text-clay transition-colors mt-4"
             >
-              <Phone size={18} /> Call Now
+              <Phone size={15} /> or call {settings.phone}
             </a>
           </div>
         </div>
