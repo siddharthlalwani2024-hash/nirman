@@ -7,6 +7,7 @@ import { StickyBarProvider } from "./context/StickyBarContext";
 import { Toaster } from "./components/ui/sonner";
 import { PublicLayout } from "./components/layout/PublicLayout";
 import { ProtectedRoute } from "./components/admin/ProtectedRoute";
+import { ScrollToTop } from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
 import RoomCategory from "./pages/RoomCategory";
@@ -37,6 +38,7 @@ function App() {
         <SettingsProvider>
           <StickyBarProvider>
             <BrowserRouter>
+              <ScrollToTop />
               <Routes>
                 <Route element={<PublicLayout />}>
                   <Route index element={<Home />} />
