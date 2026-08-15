@@ -17,13 +17,18 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-bone/95 backdrop-blur-md border-b border-greige">
+    <header className="sticky top-0 z-40 bg-canvas/95 backdrop-blur-md border-b border-grout">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 lg:h-20">
-        <Link to="/" data-testid="navbar-logo" className="flex items-center gap-2.5 font-serif text-xl lg:text-2xl text-charcoal tracking-tight">
-          {settings?.logo_url && <img src={settings.logo_url} alt="Nirman Udyog logo" className="h-9 w-9 object-contain" />}
-          Nirman <span className="text-cobalt">Udyog</span>
+        <Link to="/" data-testid="navbar-logo" className="flex items-center gap-2.5 font-serif text-xl lg:text-2xl text-ink tracking-tight">
+          {settings?.logo_url ? (
+            <img src={settings.logo_url} alt="Nirman Udyog logo" className="h-10 lg:h-12 w-auto object-contain" />
+          ) : (
+            <span>
+              Nirman <span className="text-clay">Udyog</span>
+            </span>
+          )}
         </Link>
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
             <NavLink
               key={l.to}
@@ -31,21 +36,30 @@ export function Navbar() {
               end={l.to === "/"}
               data-testid={`nav-link-${l.label.toLowerCase()}`}
               className={({ isActive }) =>
-                `text-sm font-medium tracking-wide pb-1 border-b-2 transition-colors ${
-                  isActive ? "text-cobalt border-cobalt" : "text-charcoal border-transparent hover:text-cobalt hover:border-cobalt"
+                `group relative text-sm font-medium tracking-wide py-1 transition-colors ${
+                  isActive ? "text-clay" : "text-ink hover:text-clay"
                 }`
               }
             >
-              {l.label}
+              {({ isActive }) => (
+                <>
+                  {l.label}
+                  <span
+                    className={`absolute left-0 -bottom-0.5 h-[2px] bg-clay transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                  />
+                </>
+              )}
             </NavLink>
           ))}
         </nav>
-        <button data-testid="mobile-menu-toggle" className="lg:hidden text-charcoal" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button data-testid="mobile-menu-toggle" className="lg:hidden text-ink" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
       {open && (
-        <div className="lg:hidden bg-bone border-t border-greige px-4 pb-4">
+        <div className="lg:hidden bg-canvas border-t border-grout px-4 pb-4">
           {links.map((l) => (
             <NavLink
               key={l.to}
@@ -53,7 +67,7 @@ export function Navbar() {
               end={l.to === "/"}
               onClick={() => setOpen(false)}
               data-testid={`mobile-nav-link-${l.label.toLowerCase()}`}
-              className={({ isActive }) => `block py-3 text-base border-b border-greige/60 ${isActive ? "text-cobalt" : "text-charcoal"}`}
+              className={({ isActive }) => `block py-3 text-base border-b border-grout/60 ${isActive ? "text-clay" : "text-ink"}`}
             >
               {l.label}
             </NavLink>

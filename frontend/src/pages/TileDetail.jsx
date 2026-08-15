@@ -28,12 +28,14 @@ export default function TileDetail() {
 
   useEffect(() => {
     if (!tile || !stickyBar) return;
-    stickyBar.setOverride({ message: tileInquiryMessage(tile), label: "Ask About This Tile" });
-    return () => stickyBar.setOverride(null);
-  }, [tile, stickyBar]);
+    const { setOverride } = stickyBar;
+    setOverride({ message: tileInquiryMessage(tile), label: "Ask About This Tile" });
+    return () => setOverride(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tile]);
 
-  if (notFound) return <div className="max-w-7xl mx-auto px-4 py-24 text-center text-taupe">Tile not found.</div>;
-  if (!tile) return <div className="max-w-7xl mx-auto px-4 py-24 text-center text-taupe">Loading…</div>;
+  if (notFound) return <div className="max-w-7xl mx-auto px-4 py-24 text-center text-ink/60">Tile not found.</div>;
+  if (!tile) return <div className="max-w-7xl mx-auto px-4 py-24 text-center text-ink/60">Loading…</div>;
 
   const waLink = settings?.whatsapp_number ? buildWhatsAppLink(settings.whatsapp_number, tileInquiryMessage(tile)) : "#";
 
@@ -43,7 +45,7 @@ export default function TileDetail() {
 
       <div className="grid lg:grid-cols-2 gap-10">
         <div>
-          <div className="aspect-square bg-greige rounded-md overflow-hidden mb-3">
+          <div className="aspect-square bg-canvasAlt rounded-md overflow-hidden mb-3">
             {tile.images?.[activeIndex] && (
               <img
                 src={resolveImageUrl(tile.images[activeIndex].url)}
@@ -77,23 +79,23 @@ export default function TileDetail() {
             <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-cobalt bg-cobalt/10 rounded-full px-3 py-1">{tile.type}</span>
             {tile.is_kajaria && <span className="inline-block text-[11px] font-semibold text-white bg-cobalt rounded-full px-3 py-1">Kajaria</span>}
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-charcoal mb-2" data-testid="tile-name">{tile.name}</h1>
-          <p className="text-sm text-taupe mb-6" data-testid="tile-sku">SKU: {tile.sku}</p>
+          <h1 className="font-serif text-3xl sm:text-4xl text-ink mb-2" data-testid="tile-name">{tile.name}</h1>
+          <p className="text-sm text-ink/60 mb-6" data-testid="tile-sku">SKU: {tile.sku}</p>
 
-          <dl className="grid grid-cols-2 gap-4 mb-6 border-y border-greige py-5">
+          <dl className="grid grid-cols-2 gap-4 mb-6 border-y border-grout py-5">
             <div>
-              <dt className="text-xs text-taupe uppercase tracking-wide">Size</dt>
-              <dd className="text-charcoal font-medium">{tile.size}</dd>
+              <dt className="text-xs text-ink/60 uppercase tracking-wide">Size</dt>
+              <dd className="text-ink font-medium">{tile.size}</dd>
             </div>
             <div>
-              <dt className="text-xs text-taupe uppercase tracking-wide">Finish</dt>
-              <dd className="text-charcoal font-medium">{tile.finish || "—"}</dd>
+              <dt className="text-xs text-ink/60 uppercase tracking-wide">Finish</dt>
+              <dd className="text-ink font-medium">{tile.finish || "—"}</dd>
             </div>
             <div className="col-span-2">
-              <dt className="text-xs text-taupe uppercase tracking-wide mb-1">Suited for</dt>
+              <dt className="text-xs text-ink/60 uppercase tracking-wide mb-1">Suited for</dt>
               <dd className="flex gap-2 flex-wrap">
                 {tile.rooms?.map((r) => (
-                  <Link key={r} to={`/tiles/${r}`} className="text-xs bg-greige text-charcoal px-2.5 py-1 rounded-full capitalize hover:bg-clay hover:text-bone transition-colors">
+                  <Link key={r} to={`/tiles/${r}`} className="text-xs bg-canvasAlt text-ink px-2.5 py-1 rounded-full capitalize hover:bg-clay hover:text-canvas transition-colors">
                     {r}
                   </Link>
                 ))}
@@ -101,7 +103,7 @@ export default function TileDetail() {
             </div>
           </dl>
 
-          {tile.description && <p className="text-charcoal/90 leading-relaxed mb-8">{tile.description}</p>}
+          {tile.description && <p className="text-ink/90 leading-relaxed mb-8">{tile.description}</p>}
 
           <div className="flex flex-col sm:flex-row gap-3">
             <a
@@ -117,7 +119,7 @@ export default function TileDetail() {
               <a
                 href={`tel:${settings.phone}`}
                 data-testid="tile-call-cta"
-                className="flex items-center justify-center gap-2 border border-clay text-clay font-medium px-6 py-3.5 rounded-full hover:bg-clay hover:text-bone transition-colors"
+                className="flex items-center justify-center gap-2 border border-clay text-clay font-medium px-6 py-3.5 rounded-full hover:bg-clay hover:text-canvas transition-colors"
               >
                 <Phone size={18} /> Call Showroom
               </a>
@@ -128,14 +130,14 @@ export default function TileDetail() {
 
       {tile.demo_photos?.length > 0 && (
         <section className="mt-16">
-          <h2 className="font-serif text-2xl sm:text-3xl text-charcoal mb-6">Seen in these rooms</h2>
+          <h2 className="font-serif text-2xl sm:text-3xl text-ink mb-6">Seen in these rooms</h2>
           <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}>
             {tile.demo_photos.map((photo) => (
               <button
                 key={photo.id}
                 onClick={() => setLightboxPhoto(photo)}
                 data-testid={`tile-demo-photo-${photo.id}`}
-                className="aspect-[4/5] rounded-md overflow-hidden bg-greige"
+                className="aspect-[4/5] rounded-md overflow-hidden bg-canvasAlt"
               >
                 <img
                   src={resolveImageUrl(photo.image.medium_url)}

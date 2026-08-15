@@ -9,12 +9,12 @@ export function TileCard({ tile }) {
     <Link
       to={`/tile/${tile.slug}`}
       data-testid={`tile-card-${tile.slug}`}
-      className="group block bg-white/70 border border-greige rounded-md overflow-hidden hover:-translate-y-1 transition-transform duration-300"
+      className="group block bg-canvasAlt border border-grout rounded-md overflow-hidden shadow-soft hover:shadow-lift hover:-translate-y-1.5 transition-all duration-300"
     >
-      <div className="relative aspect-[4/5] overflow-hidden bg-greige">
+      <div className="relative aspect-[4/5] overflow-hidden bg-canvasAlt">
         {cover && (
           <>
-            {!loaded && <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-greige via-bone/60 to-greige" />}
+            {!loaded && <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-canvasAlt via-canvas/60 to-canvasAlt" />}
             <img
               src={resolveImageUrl(cover.medium_url)}
               alt={cover.alt_text || `${tile.name} tile`}
@@ -24,14 +24,16 @@ export function TileCard({ tile }) {
             />
           </>
         )}
+        {tile.is_kajaria && (
+          <span className="absolute top-3 right-3 inline-block text-[10px] font-semibold uppercase tracking-wide text-ink bg-brass rounded-full px-2.5 py-1 shadow-soft">
+            Kajaria
+          </span>
+        )}
       </div>
       <div className="p-4">
-        <div className="flex items-center gap-1.5 mb-2">
-          <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-cobalt bg-cobalt/10 rounded-full px-2.5 py-1">{tile.type}</span>
-          {tile.is_kajaria && <span className="inline-block text-[11px] font-semibold text-white bg-cobalt rounded-full px-2.5 py-1">Kajaria</span>}
-        </div>
-        <h3 className="font-serif text-lg text-charcoal leading-snug">{tile.name}</h3>
-        <p className="text-xs text-taupe mt-1">
+        <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-clay bg-clay/10 rounded-full px-2.5 py-1 mb-2">{tile.type}</span>
+        <h3 className="font-serif text-lg text-ink leading-snug">{tile.name}</h3>
+        <p className="text-xs text-ink/60 mt-1 font-mono">
           {tile.size} · SKU {tile.sku}
         </p>
       </div>

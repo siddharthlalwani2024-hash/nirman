@@ -8,11 +8,11 @@ export function Lightbox({ photo, onClose, onPrev, onNext }) {
 
   return (
     <div
-      className="fixed inset-0 z-[60] bg-charcoal/95 flex items-center justify-center p-4"
+      className="fixed inset-0 z-[60] bg-ink/95 flex items-center justify-center p-4"
       onClick={onClose}
       data-testid="lightbox-overlay"
     >
-      <button onClick={onClose} data-testid="lightbox-close" className="absolute top-5 right-5 text-bone/80 hover:text-bone" aria-label="Close">
+      <button onClick={onClose} data-testid="lightbox-close" className="absolute top-5 right-5 text-canvas/80 hover:text-canvas" aria-label="Close">
         <X size={28} />
       </button>
       {onPrev && (
@@ -22,7 +22,7 @@ export function Lightbox({ photo, onClose, onPrev, onNext }) {
             onPrev();
           }}
           data-testid="lightbox-prev"
-          className="absolute left-3 sm:left-6 text-bone/80 hover:text-bone"
+          className="absolute left-3 sm:left-6 text-canvas/80 hover:text-canvas"
           aria-label="Previous"
         >
           <ChevronLeft size={32} />
@@ -35,7 +35,7 @@ export function Lightbox({ photo, onClose, onPrev, onNext }) {
             onNext();
           }}
           data-testid="lightbox-next"
-          className="absolute right-3 sm:right-6 text-bone/80 hover:text-bone"
+          className="absolute right-3 sm:right-6 text-canvas/80 hover:text-canvas"
           aria-label="Next"
         >
           <ChevronRight size={32} />
@@ -48,17 +48,17 @@ export function Lightbox({ photo, onClose, onPrev, onNext }) {
           className="w-full max-h-[70vh] object-contain rounded-md"
         />
         {(photo.caption || photo.tiles?.length > 0) && (
-          <div className="mt-4 bg-bone rounded-md p-4">
-            {photo.caption && <p className="text-charcoal text-sm mb-2">{photo.caption}</p>}
+          <div className="mt-4 bg-canvas rounded-md p-4">
+            {photo.caption && <p className="text-ink text-sm mb-2">{photo.caption}</p>}
             {photo.tiles?.length > 0 && (
               <div className="flex flex-wrap gap-2 items-center">
-                <span className="text-xs text-taupe mr-1">Tiles used:</span>
+                <span className="text-xs text-ink/60 mr-1">Tiles used:</span>
                 {photo.tiles.map((t) => (
                   <Link
                     key={t.id}
                     to={`/tile/${t.slug}`}
                     data-testid={`lightbox-tile-chip-${t.slug}`}
-                    className="text-xs bg-clay/10 text-clay px-2.5 py-1 rounded-full hover:bg-clay hover:text-bone transition-colors"
+                    className="text-xs bg-clay/10 text-clay px-2.5 py-1 rounded-full hover:bg-clay hover:text-canvas transition-colors"
                   >
                     {t.name}
                   </Link>

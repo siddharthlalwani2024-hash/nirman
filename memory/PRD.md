@@ -37,13 +37,21 @@ deep link pre-filled with tile name + SKU is the single highest-leverage detail.
 - Tested by testing_agent: 27/27 backend pytest tests pass, all critical frontend flows verified (100%). No blocking issues.
 - Admin credentials: siddharth.lalwani2024@vitstudent.ac.in / NirmanUdyog@2026 (in /app/memory/test_credentials.md)
 
+## What's Been Implemented (2026-08-15, redesign pass)
+- Full brand redesign: new color tokens in tailwind.config.js — Ink #1B2A41, Canvas #F6F1E7, Canvas-Alt #EFE8D8, Clay #B5502E, Clay-Dark #93401F, Grout #C9C2B2, Brass #A8823C. Old tokens (bone, greige, charcoal, taupe, old clay hex) fully removed via sitewide rename. Kajaria-blue (`kajaria`/`cobalt`) and WhatsApp-green kept as restricted-use functional colors (trust strip, dealer badge, WA CTA only) per original spec — unchanged.
+- Fonts swapped: Fraunces (serif/headings), Work Sans (sans/body), IBM Plex Mono (SKU codes, stat numbers) via Google Fonts in index.html.
+- Home.jsx rebuilt: hero with left-to-right Ink gradient + corner-tick decorative brackets, 4:5 category grid with grout-line animated clay underline, new StatCounters.jsx (animated count-up: SKUs/projects/years/warranty), new ComparisonBlock.jsx ("Nirman Udyog vs Typical shop"), new FaqSection.jsx (shadcn accordion, 180° chevron rotate + slide-down), Reveal.jsx scroll-reveal wrapper (framer-motion whileInView, fade+translateY, ~280ms).
+- TileCard.jsx: Canvas-Alt bg, Brass "Kajaria" badge, hover lift+shadow. Navbar/Footer: swapped to uploaded logo (settings.logo_url), clay underline nav animation, footer logo in canvas chip on ink bg.
+- index.css: 6px radius, global focus-visible ring (2px clay offset), corner-tick utility classes.
+- Bug fixed: StickyBarContext infinite render loop on /tile/{slug} (unmemoized context value + setOverride in effect deps) — memoized context value + removed stickyBar object from effect deps.
+- Tested by testing_agent: 95% frontend pass, all pages regression-checked (public + admin), only bug found (render loop) fixed and reverified with clean console.
+
 ## Backlog (prioritized)
-- P0: Owner uploads real showroom photos (60 catalogue images) via admin — replaces placeholder Unsplash seed data
-- P1: Minor — add GET /api/admin/demo-photos/{id} endpoint (currently frontend filters list client-side for edit-load; works today, small perf/clarity improvement later)
 - P1: Flip to paid/always-on hosting before starting paid ads (avoid cold-start waste on ad budget) — noted as open item from original spec, no rework needed on app side
 - P2: Optional future i18n scaffolding (explicitly out of scope for now)
 - P2: Optional blog richtext/markdown editor (current is plain textarea)
+- P2: Comparison Block / FAQ content currently static/hardcoded in frontend — could move to admin-editable settings fields if owner wants to change copy without a code change
 
 ## Next Tasks
-- Await user's real photo batch + confirm final category descriptions/hero images in admin
 - Confirm final WhatsApp business number is live/active for the +91 9475833221 number provided
+- Await any further design feedback on the new Ink/Canvas/Clay/Brass palette from the owner

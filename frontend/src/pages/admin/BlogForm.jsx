@@ -37,7 +37,7 @@ export default function BlogForm() {
 
   return (
     <div data-testid="admin-blog-form">
-      <h1 className="font-serif text-3xl text-charcoal mb-8">{isEdit ? "Edit Post" : "New Post"}</h1>
+      <h1 className="font-serif text-3xl text-ink mb-8">{isEdit ? "Edit Post" : "New Post"}</h1>
       <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
         <Field label="Title">
           <input data-testid="blog-form-title" required value={form.title} onChange={(e) => set("title", e.target.value)} className="input" />
@@ -56,10 +56,10 @@ export default function BlogForm() {
         <Field label="Content">
           <textarea data-testid="blog-form-content" required rows={10} value={form.content} onChange={(e) => set("content", e.target.value)} className="input" />
         </Field>
-        <label className="flex items-center gap-2 text-sm text-charcoal">
+        <label className="flex items-center gap-2 text-sm text-ink">
           <input type="checkbox" data-testid="blog-form-published" checked={form.published} onChange={(e) => set("published", e.target.checked)} /> Published
         </label>
-        <button type="submit" disabled={saving} data-testid="blog-form-submit" className="bg-clay text-bone px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
+        <button type="submit" disabled={saving} data-testid="blog-form-submit" className="bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
           {saving ? "Saving…" : "Save Post"}
         </button>
       </form>
@@ -70,7 +70,7 @@ export default function BlogForm() {
 function Field({ label, children }) {
   return (
     <div>
-      <label className="block text-xs text-taupe uppercase tracking-wide mb-1">{label}</label>
+      <label className="block text-xs text-ink/60 uppercase tracking-wide mb-1">{label}</label>
       {children}
     </div>
   );

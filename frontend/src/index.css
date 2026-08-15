@@ -4,26 +4,59 @@
 
 body {
     margin: 0;
-    font-family: "Manrope", sans-serif;
+    font-family: "Work Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f6f1ea;
-    color: #2b2621;
+    background-color: #f6f1e7;
+    color: #1b2a41;
 }
 
 h1, h2, h3, h4, .font-display {
-    font-family: "Playfair Display", serif;
+    font-family: "Fraunces", serif;
+}
+
+.font-mono, .stat-number, .sku-tag {
+    font-family: "IBM Plex Mono", monospace;
 }
 
 ::selection {
-    background-color: #b5602f;
-    color: #f6f1ea;
+    background-color: #b5502e;
+    color: #f6f1e7;
 }
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: #b5602f #e4d9c8;
+    scrollbar-color: #b5502e #efe8d8;
 }
+
+:focus-visible {
+    outline: 2px solid #b5502e;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+@keyframes reveal-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.corner-tick {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-color: #f6f1e7;
+    opacity: 0.7;
+}
+.corner-tick.tl { top: 20px; left: 20px; border-top: 2px solid; border-left: 2px solid; }
+.corner-tick.tr { top: 20px; right: 20px; border-top: 2px solid; border-right: 2px solid; }
+.corner-tick.bl { bottom: 20px; left: 20px; border-bottom: 2px solid; border-left: 2px solid; }
+.corner-tick.br { bottom: 20px; right: 20px; border-bottom: 2px solid; border-right: 2px solid; }
 
 @layer base {
     :root {
@@ -46,7 +79,7 @@ h1, h2, h3, h4, .font-display {
         --border: 33 25% 80%;
         --input: 33 25% 80%;
         --ring: 20 42% 41%;
-        --radius: 0.5rem;
+        --radius: 0.375rem;
     }
 }
 
@@ -55,12 +88,12 @@ h1, h2, h3, h4, .font-display {
         @apply border-border;
     }
     body {
-        @apply bg-bone text-charcoal;
+        @apply bg-canvas text-ink;
     }
 }
 
 .lazy-img {
-    background-color: #e4d9c8;
+    background-color: #efe8d8;
 }
 
 .sticky-wa-safe {
@@ -68,5 +101,5 @@ h1, h2, h3, h4, .font-display {
 }
 
 .input {
-    @apply w-full border border-greige rounded-md px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-clay text-charcoal;
+    @apply w-full border border-grout rounded-md px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-clay text-ink;
 }

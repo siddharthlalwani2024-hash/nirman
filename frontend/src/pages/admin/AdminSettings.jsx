@@ -42,12 +42,12 @@ export default function AdminSettings() {
 
   return (
     <div data-testid="admin-settings-page">
-      <h1 className="font-serif text-3xl text-charcoal mb-6">Settings</h1>
+      <h1 className="font-serif text-3xl text-ink mb-6">Settings</h1>
       <div className="flex gap-2 mb-8">
-        <button onClick={() => setTab("site")} data-testid="settings-tab-site" className={`px-4 py-2 rounded-full text-sm ${tab === "site" ? "bg-clay text-bone" : "bg-greige text-charcoal"}`}>
+        <button onClick={() => setTab("site")} data-testid="settings-tab-site" className={`px-4 py-2 rounded-full text-sm ${tab === "site" ? "bg-clay text-canvas" : "bg-canvasAlt text-ink"}`}>
           Site Settings
         </button>
-        <button onClick={() => setTab("categories")} data-testid="settings-tab-categories" className={`px-4 py-2 rounded-full text-sm ${tab === "categories" ? "bg-clay text-bone" : "bg-greige text-charcoal"}`}>
+        <button onClick={() => setTab("categories")} data-testid="settings-tab-categories" className={`px-4 py-2 rounded-full text-sm ${tab === "categories" ? "bg-clay text-canvas" : "bg-canvasAlt text-ink"}`}>
           Categories
         </button>
       </div>
@@ -160,7 +160,7 @@ export default function AdminSettings() {
           <Field label="About: Why Us">
             <textarea data-testid="settings-about-why-us" className="input" rows={4} value={settings.about_why_us || ""} onChange={(e) => set("about_why_us", e.target.value)} />
           </Field>
-          <label className="flex items-center gap-2 text-sm text-charcoal">
+          <label className="flex items-center gap-2 text-sm text-ink">
             <input type="checkbox" data-testid="settings-kajaria-badge" checked={!!settings.kajaria_dealer_badge} onChange={(e) => set("kajaria_dealer_badge", e.target.checked)} /> Show
             Authorized Kajaria Dealer badge
           </label>
@@ -170,7 +170,7 @@ export default function AdminSettings() {
           <Field label="Instagram URL">
             <input data-testid="settings-instagram" className="input" value={settings.social_links?.instagram || ""} onChange={(e) => setSocial("instagram", e.target.value)} />
           </Field>
-          <button type="submit" data-testid="settings-save-button" className="bg-clay text-bone px-7 py-3 rounded-full hover:bg-claydark transition-colors">
+          <button type="submit" data-testid="settings-save-button" className="bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors">
             Save Settings
           </button>
         </form>
@@ -179,8 +179,8 @@ export default function AdminSettings() {
       {tab === "categories" && (
         <div className="space-y-8 max-w-2xl">
           {categories.map((cat) => (
-            <div key={cat.slug} data-testid={`category-edit-${cat.slug}`} className="border border-greige rounded-md p-5 bg-white">
-              <h3 className="font-serif text-lg text-charcoal mb-4">{cat.name}</h3>
+            <div key={cat.slug} data-testid={`category-edit-${cat.slug}`} className="border border-grout rounded-md p-5 bg-white">
+              <h3 className="font-serif text-lg text-ink mb-4">{cat.name}</h3>
               <Field label="Hero Image">
                 <ImageUploader
                   images={cat.hero_image ? [{ url: cat.hero_image, thumb_url: cat.hero_image }] : []}
@@ -198,7 +198,7 @@ export default function AdminSettings() {
                   onChange={(e) => updateCategory(cat.slug, "description", e.target.value)}
                 />
               </Field>
-              <button onClick={() => saveCategory(cat)} data-testid={`category-save-${cat.slug}`} className="bg-clay text-bone px-5 py-2 rounded-full text-sm hover:bg-claydark transition-colors">
+              <button onClick={() => saveCategory(cat)} data-testid={`category-save-${cat.slug}`} className="bg-clay text-canvas px-5 py-2 rounded-full text-sm hover:bg-claydark transition-colors">
                 Save {cat.name}
               </button>
             </div>
@@ -212,7 +212,7 @@ export default function AdminSettings() {
 function Field({ label, children }) {
   return (
     <div>
-      <label className="block text-xs text-taupe uppercase tracking-wide mb-1">{label}</label>
+      <label className="block text-xs text-ink/60 uppercase tracking-wide mb-1">{label}</label>
       {children}
     </div>
   );

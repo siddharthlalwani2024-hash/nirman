@@ -1,0 +1,33 @@
+{
+  "summary": "Frontend-only regression + visual test of the sitewide redesign (new Ink/Canvas/Clay/Brass palette, Fraunces/Work Sans/IBM Plex Mono fonts, new Home sections: hero, category grid, StatCounters, ComparisonBlock, FaqSection, Reveal scroll-in). Homepage renders exactly per spec: ink hero gradient, corner-tick brackets, Fraunces headline, Clay filled + outlined pill CTAs, trust strip (kajaria-blue restricted color) with 300+/1200+/10yr stats, 6 category cards (4:5 with animated clay underline), StatCounters section on dark ink with brass IBM Plex Mono numbers animating to 300+/1200+/15/10yr, ComparisonBlock with 5 rows Nirman vs Typical shop, FAQ accordion opens/closes with chevron rotation, footer logo shown in canvas chip on ink bg, Kajaria dealer badge visible. Navbar logo renders (settings.logo_url), desktop nav shows active clay underline on Home, mobile hamburger opens full-screen menu with 11 links working. All 6 room category routes (/tiles/bathroom|kitchen|living|outdoor|wall|floor), /gallery (71 photos), /about, /contact, /blog, /tile/{slug}, /404 render without visual breakage. Admin login works with provided credentials; Dashboard, Tiles, Tile Form (new), Demo Photos, Blog, Settings, Featured Picks (correct route is /admin/featured-picks) all render cleanly with new palette. Sticky WhatsApp bar renders on every page in green (restricted brand color) and does not clash. No page-level React exceptions on any public route except TileDetail which spams a Maximum update depth exceeded warning (see critical below).",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "TileDetail.jsx",
+        "issue": "Infinite render loop: 'Maximum update depth exceeded' fires continuously in console on every /tile/{slug} page. Root cause: StickyBarContext provider passes an inline object value `{ override, setOverride }` (new reference each render), and TileDetail useEffect depends on the whole `stickyBar` object. Calling `stickyBar.setOverride(...)` inside the effect updates provider state -> new context value reference -> effect re-runs -> setOverride called again -> loop. Page still visually renders (H1, image, CTAs all appear) so users may not notice, but this causes wasted CPU, breaks React DevTools and will regress other effects. Fix: either memoize the provider value with useMemo, or change the effect deps to `[tile, stickyBar.setOverride]` after wrapping setOverride in useCallback, or destructure `const { setOverride } = stickyBar;` outside the effect and depend on `[tile]` only.",
+        "selector": "/tile/{slug}",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix TileDetail infinite render loop by memoizing StickyBarContext provider value with useMemo (or wrapping setOverride in useCallback and destructuring it out of the deps). This is the only functional bug found this pass."
+  ],
+  "critical_code_review_comments": [
+    "StickyBarContext.jsx passes an unmemoized object literal as `value` to the provider — every consumer re-renders on every parent render even when state is unchanged. Wrap in useMemo(() => ({ override, setOverride }), [override]).",
+    "TileDetail.jsx effect on [tile, stickyBar] is the trigger for the loop above; safer pattern is to depend on stable function refs only.",
+    "TileDetail.jsx still uses `border-cobalt` and `bg-cobalt` for the type-chip / Kajaria pill and active thumbnail border — this is per spec (kajaria/cobalt is a restricted-use functional color for dealer/trust indicators), so NOT a redesign violation, just flagging for awareness."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "not tested (per request)", "frontend": "95%" },
+  "test_credentials": "Admin: siddharth.lalwani2024@vitstudent.ac.in / NirmanUdyog@2026 — verified working, redirects to /admin dashboard on success.",
+  "seed_data_creation": "None. Used existing seeded tiles (18), demo photos (71), blog posts (3).",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Redesign is visually solid across all public + admin pages — hero, StatCounters (data-testid=stat-counters-section), ComparisonBlock (data-testid=comparison-block), FaqSection (data-testid=faq-section, faq-item-0..N), Reveal scroll-in, TileCard w/ Brass Kajaria badge, Navbar/Footer logo swap all working. Only remaining item is the TileDetail infinite render loop from StickyBarContext (pre-existing bug surfaced by deeper testing, not caused by redesign). Once memoized, re-verify /tile/aqua-marine-nu-cer-116 has a clean console. Note admin featured-picks route is /admin/featured-picks (not /admin/featured).",
+  "rca of the issue": "TileDetail useEffect depends on the `stickyBar` context object which is a new `{ override, setOverride }` literal every render of StickyBarProvider. Inside the effect it calls setOverride, which triggers a provider re-render, producing a new context value reference, which retriggers the effect. Reproduction: open any /tile/{slug} URL, open devtools console, observe recurring 'Maximum update depth exceeded' warnings (React caps them but the loop still runs until unmount). Mitigation: `const value = useMemo(() => ({ override, setOverride }), [override]);` in StickyBarContext.jsx."
+}

@@ -45,7 +45,7 @@ export default function DemoPhotoForm() {
 
   return (
     <div data-testid="admin-demo-photo-form">
-      <h1 className="font-serif text-3xl text-charcoal mb-8">{isEdit ? "Edit Demo Photo" : "New Demo Photo"}</h1>
+      <h1 className="font-serif text-3xl text-ink mb-8">{isEdit ? "Edit Demo Photo" : "New Demo Photo"}</h1>
       <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
         <Field label="Photo">
           <ImageUploader images={form.image ? [form.image] : []} onChange={(imgs) => set("image", imgs[0] || null)} multiple={false} folder="demo-photos" editableAlt />
@@ -63,24 +63,24 @@ export default function DemoPhotoForm() {
           <input data-testid="demo-photo-form-caption" value={form.caption} onChange={(e) => set("caption", e.target.value)} className="input" />
         </Field>
         <Field label="Tiles used in this look">
-          <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto border border-greige rounded-md p-3">
+          <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto border border-grout rounded-md p-3">
             {tiles.map((t) => (
               <button
                 type="button"
                 key={t.id}
                 onClick={() => toggleTile(t.id)}
                 data-testid={`demo-photo-tile-option-${t.slug}`}
-                className={`text-xs px-3 py-1.5 rounded-full ${form.tile_ids.includes(t.id) ? "bg-clay text-bone" : "bg-greige text-charcoal"}`}
+                className={`text-xs px-3 py-1.5 rounded-full ${form.tile_ids.includes(t.id) ? "bg-clay text-canvas" : "bg-canvasAlt text-ink"}`}
               >
                 {t.name}
               </button>
             ))}
           </div>
         </Field>
-        <label className="flex items-center gap-2 text-sm text-charcoal">
+        <label className="flex items-center gap-2 text-sm text-ink">
           <input type="checkbox" data-testid="demo-photo-form-published" checked={form.published} onChange={(e) => set("published", e.target.checked)} /> Published
         </label>
-        <button type="submit" disabled={saving} data-testid="demo-photo-form-submit" className="bg-clay text-bone px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
+        <button type="submit" disabled={saving} data-testid="demo-photo-form-submit" className="bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
           {saving ? "Saving…" : "Save Photo"}
         </button>
       </form>
@@ -91,7 +91,7 @@ export default function DemoPhotoForm() {
 function Field({ label, children }) {
   return (
     <div>
-      <label className="block text-xs text-taupe uppercase tracking-wide mb-1">{label}</label>
+      <label className="block text-xs text-ink/60 uppercase tracking-wide mb-1">{label}</label>
       {children}
     </div>
   );

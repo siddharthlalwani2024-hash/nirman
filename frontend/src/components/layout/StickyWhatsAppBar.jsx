@@ -14,7 +14,7 @@ export function StickyWhatsAppBar() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 sticky-wa-safe">
-      <div className="bg-bone/95 backdrop-blur-md border-t border-greige shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.15)] px-4 py-3 flex items-center gap-3 max-w-3xl mx-auto">
+      <div className="bg-canvas/95 backdrop-blur-md border-t border-grout shadow-[0_-6px_20px_-6px_rgba(0,0,0,0.15)] px-4 py-3 flex items-center gap-3 max-w-3xl mx-auto">
         <a
           href={waLink}
           target="_blank"
@@ -28,7 +28,7 @@ export function StickyWhatsAppBar() {
           href={`tel:${settings.phone}`}
           data-testid="sticky-call-button"
           aria-label="Call now"
-          className="flex items-center justify-center w-12 h-12 rounded-full border border-clay text-clay hover:bg-clay hover:text-bone transition-colors shrink-0"
+          className="flex items-center justify-center w-12 h-12 rounded-full border border-clay text-clay hover:bg-clay hover:text-canvas transition-colors shrink-0"
         >
           <Phone size={18} />
         </a>

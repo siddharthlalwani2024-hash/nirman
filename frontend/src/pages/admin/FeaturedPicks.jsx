@@ -39,12 +39,12 @@ export default function FeaturedPicks() {
   return (
     <div data-testid="admin-featured-picks">
       <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
-        <h1 className="font-serif text-3xl text-charcoal">Featured Picks</h1>
-        <span data-testid="featured-count" className={`text-sm font-semibold ${selected.length >= MAX ? "text-clay" : "text-taupe"}`}>
+        <h1 className="font-serif text-3xl text-ink">Featured Picks</h1>
+        <span data-testid="featured-count" className={`text-sm font-semibold ${selected.length >= MAX ? "text-clay" : "text-ink/60"}`}>
           {selected.length} / {MAX} selected
         </span>
       </div>
-      <p className="text-taupe text-sm mb-6 max-w-xl">
+      <p className="text-ink/60 text-sm mb-6 max-w-xl">
         Pick up to {MAX} tiles to show in the "Featured" section on the homepage. Swap them out anytime — a quick way to refresh the look each week.
       </p>
       {saved && (
@@ -64,27 +64,27 @@ export default function FeaturedPicks() {
               disabled={disabled}
               data-testid={`featured-pick-${tile.slug}`}
               className={`relative text-left border rounded-md overflow-hidden transition-all bg-white ${
-                isSelected ? "border-clay ring-2 ring-clay" : "border-greige"
+                isSelected ? "border-clay ring-2 ring-clay" : "border-grout"
               } ${disabled ? "opacity-40 cursor-not-allowed" : "hover:-translate-y-1"}`}
             >
-              <div className="aspect-[4/3] bg-greige">
+              <div className="aspect-[4/3] bg-canvasAlt">
                 <img src={resolveImageUrl(tile.images?.[0]?.thumb_url)} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="p-3">
-                <p className="text-sm font-medium text-charcoal truncate">{tile.name}</p>
-                <p className="text-xs text-taupe">{tile.sku}</p>
+                <p className="text-sm font-medium text-ink truncate">{tile.name}</p>
+                <p className="text-xs text-ink/60">{tile.sku}</p>
               </div>
-              {isSelected && <span className="absolute top-2 right-2 bg-clay text-bone text-[10px] font-semibold px-2 py-0.5 rounded-full">Featured</span>}
+              {isSelected && <span className="absolute top-2 right-2 bg-clay text-canvas text-[10px] font-semibold px-2 py-0.5 rounded-full">Featured</span>}
             </button>
           );
         })}
       </div>
-      {tiles.length === 0 && <p className="text-taupe text-sm">No tiles yet.</p>}
+      {tiles.length === 0 && <p className="text-ink/60 text-sm">No tiles yet.</p>}
       <button
         onClick={save}
         disabled={saving}
         data-testid="featured-save-button"
-        className="mt-8 bg-clay text-bone px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60"
+        className="mt-8 bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60"
       >
         {saving ? "Saving…" : "Save Featured Picks"}
       </button>

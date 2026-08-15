@@ -33,7 +33,7 @@ export default function Gallery() {
       <SEO title="Gallery" description="Real finished rooms — bathroom, kitchen, living, outdoor, wall and floor — using our tile range." />
       <div className="mb-8">
         <p className="text-clay text-sm font-semibold tracking-widest uppercase mb-2">Look book</p>
-        <h1 className="font-serif text-3xl sm:text-4xl text-charcoal">Finished Room Gallery</h1>
+        <h1 className="font-serif text-3xl sm:text-4xl text-ink">Finished Room Gallery</h1>
       </div>
       <div className="flex gap-2 flex-wrap mb-8">
         {["All", ...ROOMS.map((r) => r.slug)].map((r) => (
@@ -42,7 +42,7 @@ export default function Gallery() {
             onClick={() => setRoomFilter(r)}
             data-testid={`gallery-filter-${r.toLowerCase()}`}
             className={`text-xs sm:text-sm px-4 py-2 rounded-full capitalize transition-colors ${
-              roomFilter === r ? "bg-clay text-bone" : "bg-greige text-charcoal hover:bg-greige/70"
+              roomFilter === r ? "bg-clay text-canvas" : "bg-canvasAlt text-ink hover:bg-canvasAlt/70"
             }`}
           >
             {r}
@@ -54,7 +54,7 @@ export default function Gallery() {
           <DemoPhotoCard key={photo.id} photo={photo} onClick={() => openLightbox(i)} />
         ))}
       </div>
-      {filtered.length === 0 && <p className="text-taupe text-sm py-10">No photos in this room yet.</p>}
+      {filtered.length === 0 && <p className="text-ink/60 text-sm py-10">No photos in this room yet.</p>}
 
       <Lightbox
         photo={lightboxDetail}

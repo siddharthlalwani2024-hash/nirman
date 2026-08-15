@@ -39,7 +39,7 @@ export default function TileForm() {
 
   return (
     <div data-testid="admin-tile-form">
-      <h1 className="font-serif text-3xl text-charcoal mb-8">{isEdit ? "Edit Tile" : "New Tile"}</h1>
+      <h1 className="font-serif text-3xl text-ink mb-8">{isEdit ? "Edit Tile" : "New Tile"}</h1>
       <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="Name">
@@ -73,7 +73,7 @@ export default function TileForm() {
                 key={r.slug}
                 onClick={() => toggleRoom(r.slug)}
                 data-testid={`tile-form-room-${r.slug}`}
-                className={`text-sm px-4 py-2 rounded-full ${form.rooms.includes(r.slug) ? "bg-clay text-bone" : "bg-greige text-charcoal"}`}
+                className={`text-sm px-4 py-2 rounded-full ${form.rooms.includes(r.slug) ? "bg-clay text-canvas" : "bg-canvasAlt text-ink"}`}
               >
                 {r.name}
               </button>
@@ -90,18 +90,18 @@ export default function TileForm() {
         </Field>
 
         <div className="flex gap-6">
-          <label className="flex items-center gap-2 text-sm text-charcoal">
+          <label className="flex items-center gap-2 text-sm text-ink">
             <input type="checkbox" data-testid="tile-form-featured" checked={form.featured} onChange={(e) => set("featured", e.target.checked)} /> Featured
           </label>
-          <label className="flex items-center gap-2 text-sm text-charcoal">
+          <label className="flex items-center gap-2 text-sm text-ink">
             <input type="checkbox" data-testid="tile-form-published" checked={form.published} onChange={(e) => set("published", e.target.checked)} /> Published
           </label>
-          <label className="flex items-center gap-2 text-sm text-charcoal">
+          <label className="flex items-center gap-2 text-sm text-ink">
             <input type="checkbox" data-testid="tile-form-is-kajaria" checked={form.is_kajaria} onChange={(e) => set("is_kajaria", e.target.checked)} /> Genuine Kajaria SKU
           </label>
         </div>
 
-        <button type="submit" disabled={saving} data-testid="tile-form-submit" className="bg-clay text-bone px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
+        <button type="submit" disabled={saving} data-testid="tile-form-submit" className="bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
           {saving ? "Saving…" : "Save Tile"}
         </button>
       </form>
@@ -112,7 +112,7 @@ export default function TileForm() {
 function Field({ label, children }) {
   return (
     <div>
-      <label className="block text-xs text-taupe uppercase tracking-wide mb-1">{label}</label>
+      <label className="block text-xs text-ink/60 uppercase tracking-wide mb-1">{label}</label>
       {children}
     </div>
   );

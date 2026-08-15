@@ -57,7 +57,7 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
         }}
         onClick={() => inputRef.current?.click()}
         data-testid="image-upload-dropzone"
-        className={`border-2 border-dashed rounded-md p-8 text-center cursor-pointer transition-colors ${dragOver ? "border-clay bg-clay/5" : "border-greige"}`}
+        className={`border-2 border-dashed rounded-md p-8 text-center cursor-pointer transition-colors ${dragOver ? "border-clay bg-clay/5" : "border-grout"}`}
       >
         <input
           ref={inputRef}
@@ -69,11 +69,11 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
           data-testid="image-upload-input"
         />
         {uploading ? (
-          <div className="flex items-center justify-center gap-2 text-taupe">
+          <div className="flex items-center justify-center gap-2 text-ink/60">
             <Loader2 className="animate-spin" size={18} /> Uploading…
           </div>
         ) : (
-          <div className="text-taupe text-sm flex flex-col items-center gap-2">
+          <div className="text-ink/60 text-sm flex flex-col items-center gap-2">
             <Upload size={22} className="text-clay" />
             Drag &amp; drop images here, or click to browse
           </div>
@@ -82,22 +82,22 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
       {images.length > 0 && (
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mt-4">
           {images.map((img, i) => (
-            <div key={img.id || i} data-testid={`uploaded-image-${i}`} className="relative aspect-square rounded-md overflow-hidden border border-greige group">
+            <div key={img.id || i} data-testid={`uploaded-image-${i}`} className="relative aspect-square rounded-md overflow-hidden border border-grout group">
               <img src={resolveImageUrl(img.thumb_url || img.url)} alt="" className="w-full h-full object-cover" />
               <button
                 type="button"
                 onClick={() => removeAt(i)}
                 data-testid={`remove-image-${i}`}
-                className="absolute top-1 right-1 bg-charcoal/70 text-bone rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-1 right-1 bg-ink/70 text-canvas rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <X size={12} />
               </button>
               {multiple && images.length > 1 && (
                 <div className="absolute bottom-1 left-1 right-1 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button type="button" onClick={() => moveAt(i, -1)} data-testid={`move-left-${i}`} className="bg-charcoal/70 text-bone rounded-full p-1">
+                  <button type="button" onClick={() => moveAt(i, -1)} data-testid={`move-left-${i}`} className="bg-ink/70 text-canvas rounded-full p-1">
                     <ChevronLeft size={12} />
                   </button>
-                  <button type="button" onClick={() => moveAt(i, 1)} data-testid={`move-right-${i}`} className="bg-charcoal/70 text-bone rounded-full p-1">
+                  <button type="button" onClick={() => moveAt(i, 1)} data-testid={`move-right-${i}`} className="bg-ink/70 text-canvas rounded-full p-1">
                     <ChevronRight size={12} />
                   </button>
                 </div>
@@ -108,10 +108,10 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
       )}
       {editableAlt && images.length > 0 && (
         <div className="mt-4 space-y-2">
-          <p className="text-xs text-taupe uppercase tracking-wide">Alt text (for SEO &amp; accessibility)</p>
+          <p className="text-xs text-ink/60 uppercase tracking-wide">Alt text (for SEO &amp; accessibility)</p>
           {images.map((img, i) => (
             <div key={img.id || i} className="flex items-center gap-2">
-              <span className="text-xs text-taupe w-14 shrink-0">Image {i + 1}</span>
+              <span className="text-xs text-ink/60 w-14 shrink-0">Image {i + 1}</span>
               <input
                 type="text"
                 placeholder="Describe this photo, e.g. Alpine White Marble tile on a bathroom wall"

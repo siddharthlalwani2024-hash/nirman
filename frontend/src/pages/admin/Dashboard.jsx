@@ -19,17 +19,17 @@ export default function Dashboard() {
 
   return (
     <div data-testid="admin-dashboard">
-      <h1 className="font-serif text-3xl text-charcoal mb-8">Dashboard</h1>
+      <h1 className="font-serif text-3xl text-ink mb-8">Dashboard</h1>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {cards.map((c) => (
           <Link
             key={c.label}
             to={c.to}
             data-testid={`dashboard-card-${c.label.toLowerCase().replace(/ /g, "-")}`}
-            className="bg-white border border-greige rounded-md p-6 hover:-translate-y-1 transition-transform"
+            className="bg-white border border-grout rounded-md p-6 hover:-translate-y-1 transition-transform"
           >
             <p className="text-4xl font-serif text-clay">{c.value}</p>
-            <p className="text-taupe text-sm mt-1">{c.label}</p>
+            <p className="text-ink/60 text-sm mt-1">{c.label}</p>
           </Link>
         ))}
       </div>

@@ -13,7 +13,7 @@ export default function Contact() {
       <SEO title="Contact Us" description="Visit our showroom or reach us on WhatsApp and phone." />
       <div className="mb-10">
         <p className="text-clay text-sm font-semibold tracking-widest uppercase mb-2">Get In Touch</p>
-        <h1 className="font-serif text-3xl sm:text-4xl text-charcoal">Visit the Showroom</h1>
+        <h1 className="font-serif text-3xl sm:text-4xl text-ink">Visit the Showroom</h1>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-10">
@@ -21,22 +21,22 @@ export default function Contact() {
           <div className="flex gap-4 items-start">
             <MapPin className="text-clay shrink-0 mt-1" size={22} />
             <div>
-              <p className="text-sm text-taupe uppercase tracking-wide mb-1">Address</p>
-              <p className="text-charcoal" data-testid="contact-address">{settings.address}</p>
+              <p className="text-sm text-ink/60 uppercase tracking-wide mb-1">Address</p>
+              <p className="text-ink" data-testid="contact-address">{settings.address}</p>
             </div>
           </div>
           <div className="flex gap-4 items-start">
             <Clock className="text-clay shrink-0 mt-1" size={22} />
             <div>
-              <p className="text-sm text-taupe uppercase tracking-wide mb-1">Hours</p>
-              <p className="text-charcoal" data-testid="contact-hours">{settings.hours}</p>
+              <p className="text-sm text-ink/60 uppercase tracking-wide mb-1">Hours</p>
+              <p className="text-ink" data-testid="contact-hours">{settings.hours}</p>
             </div>
           </div>
           <div className="flex gap-4 items-start">
             <Phone className="text-clay shrink-0 mt-1" size={22} />
             <div>
-              <p className="text-sm text-taupe uppercase tracking-wide mb-1">Phone</p>
-              <a href={`tel:${settings.phone}`} data-testid="contact-call-link" className="text-charcoal hover:text-clay transition-colors">
+              <p className="text-sm text-ink/60 uppercase tracking-wide mb-1">Phone</p>
+              <a href={`tel:${settings.phone}`} data-testid="contact-call-link" className="text-ink hover:text-clay transition-colors">
                 {settings.phone}
               </a>
             </div>
@@ -54,7 +54,7 @@ export default function Contact() {
             <a
               href={`tel:${settings.phone}`}
               data-testid="contact-call-cta"
-              className="flex items-center justify-center gap-2 border border-clay text-clay font-medium px-6 py-3.5 rounded-full hover:bg-clay hover:text-bone transition-colors"
+              className="flex items-center justify-center gap-2 border border-clay text-clay font-medium px-6 py-3.5 rounded-full hover:bg-clay hover:text-canvas transition-colors"
             >
               <Phone size={18} /> Call Now
             </a>
@@ -62,7 +62,7 @@ export default function Contact() {
         </div>
 
         {settings.map_embed_url && (
-          <div className="rounded-md overflow-hidden border border-greige aspect-square lg:aspect-auto lg:h-full min-h-[320px]">
+          <div className="rounded-md overflow-hidden border border-grout aspect-square lg:aspect-auto lg:h-full min-h-[320px]">
             <iframe
               title="Showroom location"
               src={settings.map_embed_url}

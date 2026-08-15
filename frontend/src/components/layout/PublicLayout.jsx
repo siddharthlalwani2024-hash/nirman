@@ -5,7 +5,7 @@ import { StickyWhatsAppBar } from "./StickyWhatsAppBar";
 
 export function PublicLayout() {
   return (
-    <div className="min-h-screen flex flex-col bg-bone">
+    <div className="min-h-screen flex flex-col bg-canvas">
       <Navbar />
       <main className="flex-1 pb-24">
         <Outlet />
