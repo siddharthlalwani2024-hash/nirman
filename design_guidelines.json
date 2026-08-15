@@ -1,0 +1,89 @@
+{
+  "project_name": "Nirman Udyog",
+  "theme": "light",
+  "typography": {
+    "heading_font": "Playfair Display",
+    "body_font": "Manrope",
+    "rationale": "Playfair Display brings a tactile, editorial, gallery-like premium warmth suited for architectural spaces. Manrope is a geometric sans that is highly legible on cheaper Android devices, ensuring critical details like SKUs and dimensions are clear while avoiding the generic feel of Inter or Roboto.",
+    "hierarchy": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none font-medium",
+      "h2": "text-3xl sm:text-4xl tracking-tight leading-tight font-medium",
+      "h3": "text-2xl sm:text-3xl tracking-tight leading-snug font-medium",
+      "body": "text-base leading-relaxed text-[#2B2621]",
+      "small": "text-sm text-[#6B6259] tracking-wide"
+    }
+  },
+  "colors": {
+    "background": "#F6F1EA",
+    "surface": "#E4D9C8",
+    "text_primary": "#2B2621",
+    "text_secondary": "#6B6259",
+    "accent_primary": "#B5602F",
+    "accent_secondary": "#15508B",
+    "whatsapp_green": "#25D366",
+    "usage_rules": {
+      "background": "Bone (#F6F1EA) - Default page and section background. Replaces pure white in most places to maintain warmth.",
+      "surface": "Warm greige (#E4D9C8) - Used for structural elements like cards, image placeholders, dividers, and inactive filter chips.",
+      "text_primary": "Charcoal-brown (#2B2621) - Primary text for headings, body copy, and active nav items. Warmer than pure black.",
+      "text_secondary": "Muted taupe (#6B6259) - Used for metadata, captions, secondary details, and inactive nav items.",
+      "accent_primary": "Clay/terracotta (#B5602F) - The site's functional identity. Used for ALL primary CTAs, active states, active filter chips, links, and hover states.",
+      "accent_secondary": "Kajaria blue (#15508B) - STRICT GUARDRAIL: Used ONLY for the 'Authorized Kajaria Dealer' badge in the trust strip and footer. Nowhere else.",
+      "whatsapp_green": "WhatsApp Green (#25D366) - Exempt from the 2-accent rule. Used strictly for the sticky WhatsApp bar and WhatsApp CTA buttons to trigger instant brand recognition."
+    }
+  },
+  "layouts": {
+    "grid_system": "Bento-inspired, mobile-first responsive grid. Prioritize vertical rhythm. Use gap-4 on mobile and gap-8 on desktop.",
+    "spacing": "Generous spacing. Use p-6, p-8 for containers and py-16, py-24 for main sections to create an uncluttered, gallery-like feel where photos can breathe.",
+    "sparse_data_handling": "Room category grids must use CSS grid with auto-fill minmax(250px, 1fr) to gracefully scale from 3 to 40 items without leaving awkward empty spaces or breaking the layout.",
+    "hero_section": "Photography-dominant, full-bleed hero. Overlay text with responsive charcoal/white depending on image darkness. Single Clay CTA button. NO Blue."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#B5602F] text-[#F6F1EA] hover:bg-[#944c23] rounded-md transition-colors px-6 py-3 font-medium",
+      "whatsapp": "bg-[#25D366] text-white rounded-md hover:bg-[#20bd5a] transition-colors flex items-center justify-center gap-2 shadow-lg px-6 py-3 font-medium",
+      "secondary": "bg-transparent border border-[#E4D9C8] text-[#2B2621] hover:border-[#B5602F] rounded-md transition-colors px-6 py-3 font-medium"
+    },
+    "cards": {
+      "product_card": "bg-[#F6F1EA] md:bg-white border border-[#E4D9C8] rounded-md overflow-hidden hover:-translate-y-1 transition-transform duration-300",
+      "pills": "Material badges (PVT/GVT/Ceramic) are small clay-tinted pills (bg-[#B5602F]/10 text-[#B5602F]). Filter chips at rest are greige (bg-[#E4D9C8] text-[#2B2621]), active are clay."
+    },
+    "navigation": "Bone background (#F6F1EA), charcoal wordmark. Clay underline on active/hover items. NO blue. Always use backdrop-blur-md if sticky.",
+    "trust_strip": "Bone or white background strip. Contains 'Authorized Kajaria Dealer' lockup in #15508B, treated like a certification mark.",
+    "sticky_whatsapp_bar": "Fixed bottom-0 left-0 right-0 p-4 bg-[#F6F1EA]/95 backdrop-blur-md border-t border-[#E4D9C8] z-50 flex justify-center items-center shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]. Must contain a pre-filled WhatsApp deep link with tile name + SKU."
+  },
+  "motion": {
+    "philosophy": "Restrained, elegant, gallery-like. No bouncy, hyperactive, or excessive animations.",
+    "interactions": "Subtle hover lifts (-translate-y-1) for product cards. Smooth opacity fade-ins for images.",
+    "framer_motion": "Use `framer-motion` for staggered entrance of gallery grid items (opacity 0 to 1, y: 10 to 0). Duration 0.4s ease-out."
+  },
+  "media": {
+    "style": "Large, immersive imagery. Photos are the product. No color overlays or tints on gallery images. Use Lightbox for full view.",
+    "image_urls": {
+      "hero_bathroom": "https://images.unsplash.com/photo-1753605788101-04d1e653e74a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwYmF0aHJvb20lMjB0aWxlc3xlbnwwfHx8fDE3ODY3OTM1NzV8MA&ixlib=rb-4.1.0&q=85",
+      "category_kitchen": "https://images.unsplash.com/photo-1665507279638-5b48073c637b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBraXRjaGVuJTIwZmxvb3IlMjB0aWxlc3xlbnwwfHx8fDE3ODY3OTM1NzV8MA&ixlib=rb-4.1.0&q=85",
+      "showroom_trust": "https://images.unsplash.com/photo-1720414574239-19b692165d47?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHx0aWxlJTIwc2hvd3Jvb20lMjBpbnRlcmlvcnxlbnwwfHx8fDE3ODY3OTM1NzV8MA&ixlib=rb-4.1.0&q=85"
+    }
+  },
+  "accessibility": {
+    "contrast": "All text holds at least 4.5:1 contrast against its background.",
+    "interactive": "All buttons and links must have focus rings (focus:ring-2 focus:ring-[#B5602F] focus:outline-none focus:ring-offset-2 focus:ring-offset-[#F6F1EA]).",
+    "data_testid": "MANDATORY. Add `data-testid` to all interactive elements, e.g., `data-testid=\"whatsapp-cta-button\"`."
+  },
+  "instructions_to_main_agent": [
+    "Strictly adhere to the 2-accent rule: Clay (#B5602F) for UI identity and actions, Blue (#15508B) EXCLUSIVELY for the Kajaria Dealer trust badge.",
+    "Implement the Sticky WhatsApp bar at the bottom for mobile devices, ensuring it uses pre-filled deep links containing the specific Tile Name and SKU.",
+    "Build the public marketing and catalogue pages using raw HTML + Tailwind for custom, unconstrained layout freedom. Avoid rigidly dropping in standard Shadcn components for marketing presentation.",
+    "Use standard CSS grid with `auto-fill` and `minmax()` for product/gallery grids to ensure they look intentional even if there are only 3 items.",
+    "Use Shadcn components exclusively in the protected Admin Panel (CRUD operations, drag-and-drop multi-image upload). Keep the admin panel strictly functional with the brand's neutral colors (#F6F1EA, #E4D9C8, #2B2621).",
+    "Do not use transparent backgrounds for the sticky header; it causes text collision. Use `bg-[#F6F1EA]/90 backdrop-blur-md` instead.",
+    "Ensure image lazy-loading is implemented since the site targets cheap Android phones on mobile data."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid the 'AI slop' aesthetic by relying on generous negative space and the specific Playfair Display + Manrope typography pairing.",
+    "Do not center-align body copy. Left-align text to respect the natural reading flow.",
+    "Avoid hyper-stylized borders or glowing neons. Stick to flat, tactile colors defined in the palette.",
+    "Never use generic placeholder images or missing image icons. Use the provided Unsplash URLs.",
+    "Always apply hover, active, and focus states. An interface without micro-interactions feels broken.",
+    "Use 2x-3x more spacing (p-8, py-20, gap-8) than feels standard. Cramped interfaces destroy the 'premium showroom' illusion."
+  ]
+}

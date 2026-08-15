@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://tile-showcase-50.preview.emergentagent.com/api/sitemap.xml

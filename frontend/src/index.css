@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f6f1ea;
+    color: #2b2621;
+}
+
+h1, h2, h3, h4, .font-display {
+    font-family: "Playfair Display", serif;
+}
+
+::selection {
+    background-color: #b5602f;
+    color: #f6f1ea;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #b5602f #e4d9c8;
+}
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 3.9%;
+        --primary: 20 42% 41%;
+        --primary-foreground: 40 33% 95%;
+        --secondary: 33 30% 84%;
+        --secondary-foreground: 15 12% 15%;
+        --muted: 33 30% 84%;
+        --muted-foreground: 20 6% 39%;
+        --accent: 33 30% 84%;
+        --accent-foreground: 15 12% 15%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 33 25% 80%;
+        --input: 33 25% 80%;
+        --ring: 20 42% 41%;
+        --radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-bone text-charcoal;
+    }
+}
+
+.lazy-img {
+    background-color: #e4d9c8;
+}
+
+.sticky-wa-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.input {
+    @apply w-full border border-greige rounded-md px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-clay text-charcoal;
+}
