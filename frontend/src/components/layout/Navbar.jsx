@@ -21,7 +21,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 lg:h-20">
         <Link to="/" data-testid="navbar-logo" className="flex items-center gap-2.5 font-serif text-xl lg:text-2xl text-ink tracking-tight">
           {settings?.logo_url ? (
-            <img src={settings.logo_url} alt="Nirman Udyog logo" className="h-10 lg:h-12 w-auto object-contain" />
+            <img src={settings.logo_url} alt="Nirman Udyog logo" className="h-14 lg:h-16 w-auto object-contain" />
           ) : (
             <span>
               Nirman <span className="text-clay">Udyog</span>
