@@ -22,8 +22,8 @@ module.exports = {
         lift: '0 8px 24px -8px rgba(27,42,65,0.22)',
       },
       colors: {
-        canvas: '#E6D5E8',
-        canvasAlt: '#C8A2CB',
+        canvas: '#F6F1E7',
+        canvasAlt: '#EFE8D8',
         grout: '#C9C2B2',
         clay: '#B5502E',
         claydark: '#93401F',
