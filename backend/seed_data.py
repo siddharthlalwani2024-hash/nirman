@@ -117,6 +117,7 @@ CATEGORY_COPY = {
     "bathroom": "Water-ready finishes with a spa-like feel — from anti-skid floors to glossy statement walls.",
     "kitchen": "Backsplashes and floors built for daily spills, grease and years of cooking.",
     "living": "Large-format looks that make every room feel bigger and calmer underfoot.",
+    "bedroom": "Warm, quiet-toned wall and floor tiles that turn a bedroom into a retreat.",
     "outdoor": "Weatherproof, slip-resistant tiling for patios, balconies and courtyards.",
     "wall": "Feature walls and accent tiling that turn a plain wall into the room's focal point.",
     "floor": "Durable, easy-to-clean flooring across every finish — matte, glossy and stone-look.",
@@ -177,7 +178,7 @@ async def seed_content(db):
     if await db.categories.count_documents({}) == 0:
         cats = []
         for i, r in enumerate(ROOMS):
-            img_key = ["b1", "k2", "l2", "o1", "w1", "m3"][i]
+            img_key = ["b1", "k2", "l2", "l4", "o1", "w1", "m3"][i]
             cats.append(
                 {
                     "slug": r["slug"],

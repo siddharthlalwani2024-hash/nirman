@@ -37,6 +37,10 @@ deep link pre-filled with tile name + SKU is the single highest-leverage detail.
 - Tested by testing_agent: 27/27 backend pytest tests pass, all critical frontend flows verified (100%). No blocking issues.
 - Admin credentials: siddharth.lalwani2024@vitstudent.ac.in / NirmanUdyog@2026 (in /app/memory/test_credentials.md)
 
+## What's Been Implemented (2026-08-16)
+- Added "Bedroom" as a 7th room category (found real photos in a "Bedroom" folder inside the user's content-staging.zip that were never imported since original spec fixed rooms to 6). Added to ROOMS in backend `models.py` + frontend `constants/rooms.js`, inserted `categories` doc (hero image = real showroom bedroom display photo), uploaded & created 5 `demo_photos` (room=bedroom) via admin upload API. No tile SKUs tagged "bedroom" yet (admin can tag via Tile Form, which now shows Bedroom as an option automatically). Also fixed sticky WhatsApp bar (was full-width bar, now a compact floating pill FAB bottom-right) and Contact page CTA hierarchy, plus added `ScrollToTop` on route change (was landing on footer after nav).
+- Other unimported zip folders ("Granite collection", "Marble collection", "client's office", "parking") were intentionally left out — not room categories, need user direction if they should become tile collections or gallery-only content.
+
 ## What's Been Implemented (2026-08-15, redesign pass)
 - Full brand redesign: new color tokens in tailwind.config.js — Ink #1B2A41, Canvas #F6F1E7, Canvas-Alt #EFE8D8, Clay #B5502E, Clay-Dark #93401F, Grout #C9C2B2, Brass #A8823C. Old tokens (bone, greige, charcoal, taupe, old clay hex) fully removed via sitewide rename. Kajaria-blue (`kajaria`/`cobalt`) and WhatsApp-green kept as restricted-use functional colors (trust strip, dealer badge, WA CTA only) per original spec — unchanged.
 - Fonts swapped: Fraunces (serif/headings), Work Sans (sans/body), IBM Plex Mono (SKU codes, stat numbers) via Google Fonts in index.html.
