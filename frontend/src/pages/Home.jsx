@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { api } from "../lib/api";
 import { resolveImageUrl } from "../lib/image";
@@ -17,13 +18,22 @@ export default function Home() {
   const settings = useSettings();
   const [categories, setCategories] = useState([]);
   const [featured, setFeatured] = useState([]);
+  const [heroIndex, setHeroIndex] = useState(0);
 
   useEffect(() => {
     api.get("/categories").then((res) => setCategories(res.data));
     api.get("/tiles", { params: { featured: true } }).then((res) => setFeatured(res.data));
   }, []);
 
-  const heroImage = settings?.hero_images?.[0] || settings?.showroom_photo;
+  const heroImages = settings?.hero_images?.length ? settings.hero_images : settings?.showroom_photo ? [settings.showroom_photo] : [];
+
+  useEffect(() => {
+    if (heroImages.length < 2) return;
+    const timer = setInterval(() => setHeroIndex((i) => (i + 1) % heroImages.length), 5000);
+    return () => clearInterval(timer);
+  }, [heroImages.length]);
+
+  const heroImage = heroImages[heroIndex % heroImages.length];
   const roomCards = categories.length ? categories : ROOMS.map((r) => ({ slug: r.slug, name: r.name, hero_image: null }));
   const ribbonIndex = roomCards.length ? new Date().getDate() % roomCards.length : -1;
 
@@ -32,9 +42,20 @@ export default function Home() {
       <SEO title="Home" description={settings?.tagline} />
 
       <section className="relative h-[78vh] min-h-[480px] max-h-[720px] flex items-end overflow-hidden">
-        {heroImage && (
-          <img src={resolveImageUrl(heroImage)} alt="Nirman Udyog showroom finished room" className="absolute inset-0 w-full h-full object-cover" />
-        )}
+        <AnimatePresence>
+          {heroImage && (
+            <motion.img
+              key={heroImage}
+              src={resolveImageUrl(heroImage)}
+              alt="Nirman Udyog showroom finished room"
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1 }}
+            />
+          )}
+        </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-ink/10" />
         <span className="corner-tick tl hidden sm:block" />
         <span className="corner-tick tr hidden sm:block" />
@@ -61,6 +82,19 @@ export default function Home() {
               Browse Bathroom Tiles
             </Link>
           </div>
+          {heroImages.length > 1 && (
+            <div className="flex gap-2 mt-10" data-testid="hero-slideshow-dots">
+              {heroImages.map((_, i) => (
+                <button
+                  key={i}
+                  aria-label={`Show hero image ${i + 1}`}
+                  data-testid={`hero-dot-${i}`}
+                  onClick={() => setHeroIndex(i)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${i === heroIndex ? "w-8 bg-brass" : "w-4 bg-canvas/40 hover:bg-canvas/60"}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
