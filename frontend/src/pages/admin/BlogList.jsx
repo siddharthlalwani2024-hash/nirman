@@ -24,11 +24,11 @@ export default function BlogList() {
     <div data-testid="admin-blog-list">
       <div className="flex items-center justify-between mb-8">
         <h1 className="font-serif text-3xl text-ink">Blog</h1>
-        <Link to="/admin/blog/new" data-testid="new-blog-post-button" className="flex items-center gap-2 bg-clay text-canvas px-5 py-2.5 rounded-full hover:bg-claydark transition-colors">
+        <Link to="/admin/blog/new" data-testid="new-blog-post-button" className="flex items-center gap-2 bg-navy text-white px-5 py-2.5 rounded-full hover:bg-gold transition-colors">
           <Plus size={16} /> New Post
         </Link>
       </div>
-      <div className="bg-white border border-grout rounded-md divide-y divide-grout">
+      <div className="bg-white border border-stone rounded-md divide-y divide-stone">
         {posts.map((post) => (
           <div key={post.id} data-testid={`admin-blog-row-${post.slug}`} className="flex items-center gap-4 p-4">
             <div className="flex-1 min-w-0">
@@ -38,7 +38,7 @@ export default function BlogList() {
             <button onClick={() => togglePublish(post)} data-testid={`toggle-publish-blog-${post.slug}`} className={post.published ? "text-green-600" : "text-ink/40"}>
               {post.published ? <Eye size={18} /> : <EyeOff size={18} />}
             </button>
-            <Link to={`/admin/blog/${post.id}/edit`} data-testid={`edit-blog-${post.slug}`} className="text-ink/60 hover:text-clay">
+            <Link to={`/admin/blog/${post.id}/edit`} data-testid={`edit-blog-${post.slug}`} className="text-ink/60 hover:text-gold">
               <Pencil size={18} />
             </Link>
             <button onClick={() => remove(post)} data-testid={`delete-blog-${post.slug}`} className="text-ink/60 hover:text-red-600">

@@ -24,7 +24,7 @@ export default function BlogPost() {
       <SEO title={post.title} description={post.excerpt} image={post.cover_image ? resolveImageUrl(post.cover_image) : undefined} />
       <h1 className="font-serif text-3xl sm:text-4xl text-ink mb-6" data-testid="blog-post-title">{post.title}</h1>
       {post.cover_image && (
-        <div className="aspect-[16/9] rounded-md overflow-hidden bg-canvasAlt mb-8">
+        <div className="aspect-[16/9] rounded-md overflow-hidden bg-white mb-8">
           <img src={resolveImageUrl(post.cover_image)} alt={post.title} className="w-full h-full object-cover" />
         </div>
       )}

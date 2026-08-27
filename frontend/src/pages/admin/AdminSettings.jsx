@@ -44,10 +44,10 @@ export default function AdminSettings() {
     <div data-testid="admin-settings-page">
       <h1 className="font-serif text-3xl text-ink mb-6">Settings</h1>
       <div className="flex gap-2 mb-8">
-        <button onClick={() => setTab("site")} data-testid="settings-tab-site" className={`px-4 py-2 rounded-full text-sm ${tab === "site" ? "bg-clay text-canvas" : "bg-canvasAlt text-ink"}`}>
+        <button onClick={() => setTab("site")} data-testid="settings-tab-site" className={`px-4 py-2 rounded-full text-sm ${tab === "site" ? "bg-navy text-white" : "bg-white text-ink"}`}>
           Site Settings
         </button>
-        <button onClick={() => setTab("categories")} data-testid="settings-tab-categories" className={`px-4 py-2 rounded-full text-sm ${tab === "categories" ? "bg-clay text-canvas" : "bg-canvasAlt text-ink"}`}>
+        <button onClick={() => setTab("categories")} data-testid="settings-tab-categories" className={`px-4 py-2 rounded-full text-sm ${tab === "categories" ? "bg-navy text-white" : "bg-white text-ink"}`}>
           Categories
         </button>
       </div>
@@ -170,7 +170,7 @@ export default function AdminSettings() {
           <Field label="Instagram URL">
             <input data-testid="settings-instagram" className="input" value={settings.social_links?.instagram || ""} onChange={(e) => setSocial("instagram", e.target.value)} />
           </Field>
-          <button type="submit" data-testid="settings-save-button" className="bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors">
+          <button type="submit" data-testid="settings-save-button" className="bg-navy text-white px-7 py-3 rounded-full hover:bg-gold transition-colors">
             Save Settings
           </button>
         </form>
@@ -179,7 +179,7 @@ export default function AdminSettings() {
       {tab === "categories" && (
         <div className="space-y-8 max-w-2xl">
           {categories.map((cat) => (
-            <div key={cat.slug} data-testid={`category-edit-${cat.slug}`} className="border border-grout rounded-md p-5 bg-white">
+            <div key={cat.slug} data-testid={`category-edit-${cat.slug}`} className="border border-stone rounded-md p-5 bg-white">
               <h3 className="font-serif text-lg text-ink mb-4">{cat.name}</h3>
               <Field label="Hero Image">
                 <ImageUploader
@@ -198,7 +198,7 @@ export default function AdminSettings() {
                   onChange={(e) => updateCategory(cat.slug, "description", e.target.value)}
                 />
               </Field>
-              <button onClick={() => saveCategory(cat)} data-testid={`category-save-${cat.slug}`} className="bg-clay text-canvas px-5 py-2 rounded-full text-sm hover:bg-claydark transition-colors">
+              <button onClick={() => saveCategory(cat)} data-testid={`category-save-${cat.slug}`} className="bg-navy text-white px-5 py-2 rounded-full text-sm hover:bg-gold transition-colors">
                 Save {cat.name}
               </button>
             </div>

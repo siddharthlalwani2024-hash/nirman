@@ -37,10 +37,10 @@ export default function RoomCategory() {
         {category?.hero_image && (
           <img src={resolveImageUrl(category.hero_image)} alt={`${roomInfo.name} tiles`} className="absolute inset-0 w-full h-full object-cover" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/25 to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-8 w-full">
-          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-canvas">{roomInfo.name} Tiles</h1>
-          {category?.description && <p className="text-canvas/80 mt-2 max-w-xl text-sm sm:text-base">{category.description}</p>}
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-ivory">{roomInfo.name} Tiles</h1>
+          {category?.description && <p className="text-ivory/80 mt-2 max-w-xl text-sm sm:text-base">{category.description}</p>}
         </div>
       </section>
 
@@ -49,8 +49,8 @@ export default function RoomCategory() {
           <h2 className="font-serif text-2xl sm:text-3xl text-ink mb-6">See the look</h2>
           <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
             {photos.map((photo) => (
-              <div key={photo.id} data-testid={`room-look-card-${photo.id}`} className="bg-white/60 border border-grout rounded-md overflow-hidden flex flex-col sm:flex-row">
-                <button onClick={() => setLightboxPhoto(photo)} className="sm:w-1/2 aspect-[4/3] sm:aspect-auto shrink-0 overflow-hidden bg-canvasAlt">
+              <div key={photo.id} data-testid={`room-look-card-${photo.id}`} className="bg-white/60 border border-stone rounded-md overflow-hidden flex flex-col sm:flex-row">
+                <button onClick={() => setLightboxPhoto(photo)} className="sm:w-1/2 aspect-[4/3] sm:aspect-auto shrink-0 overflow-hidden bg-white">
                   <img
                     src={resolveImageUrl(photo.image.medium_url)}
                     alt={photo.image.alt_text || photo.caption}
@@ -63,7 +63,7 @@ export default function RoomCategory() {
                   <p className="text-xs text-ink/60 uppercase tracking-wide mb-2">Tiles used</p>
                   <div className="flex flex-wrap gap-2">
                     {tiles.filter((t) => photo.tile_ids?.includes(t.id)).slice(0, 3).map((t) => (
-                      <Link key={t.id} to={`/tile/${t.slug}`} className="text-xs bg-clay/10 text-clay px-2.5 py-1 rounded-full hover:bg-clay hover:text-canvas transition-colors">
+                      <Link key={t.id} to={`/tile/${t.slug}`} className="text-xs bg-gold/10 text-gold px-2.5 py-1 rounded-full hover:bg-gold hover:text-white transition-colors">
                         {t.name}
                       </Link>
                     ))}
@@ -85,7 +85,7 @@ export default function RoomCategory() {
                 onClick={() => setTypeFilter(t)}
                 data-testid={`filter-chip-${t.toLowerCase()}`}
                 className={`text-xs sm:text-sm px-4 py-2 rounded-full transition-colors ${
-                  typeFilter === t ? "bg-clay text-canvas" : "bg-canvasAlt text-ink hover:bg-canvasAlt/70"
+                  typeFilter === t ? "bg-navy text-white" : "bg-white text-ink hover:bg-white/70"
                 }`}
               >
                 {t}

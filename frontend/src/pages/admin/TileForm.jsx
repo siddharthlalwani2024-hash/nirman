@@ -73,7 +73,7 @@ export default function TileForm() {
                 key={r.slug}
                 onClick={() => toggleRoom(r.slug)}
                 data-testid={`tile-form-room-${r.slug}`}
-                className={`text-sm px-4 py-2 rounded-full ${form.rooms.includes(r.slug) ? "bg-clay text-canvas" : "bg-canvasAlt text-ink"}`}
+                className={`text-sm px-4 py-2 rounded-full ${form.rooms.includes(r.slug) ? "bg-navy text-white" : "bg-white text-ink"}`}
               >
                 {r.name}
               </button>
@@ -101,7 +101,7 @@ export default function TileForm() {
           </label>
         </div>
 
-        <button type="submit" disabled={saving} data-testid="tile-form-submit" className="bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
+        <button type="submit" disabled={saving} data-testid="tile-form-submit" className="bg-navy text-white px-7 py-3 rounded-full hover:bg-gold transition-colors disabled:opacity-60">
           {saving ? "Saving…" : "Save Tile"}
         </button>
       </form>

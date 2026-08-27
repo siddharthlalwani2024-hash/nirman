@@ -40,7 +40,7 @@ export default function FeaturedPicks() {
     <div data-testid="admin-featured-picks">
       <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
         <h1 className="font-serif text-3xl text-ink">Featured Picks</h1>
-        <span data-testid="featured-count" className={`text-sm font-semibold ${selected.length >= MAX ? "text-clay" : "text-ink/60"}`}>
+        <span data-testid="featured-count" className={`text-sm font-semibold ${selected.length >= MAX ? "text-gold" : "text-ink/60"}`}>
           {selected.length} / {MAX} selected
         </span>
       </div>
@@ -64,17 +64,17 @@ export default function FeaturedPicks() {
               disabled={disabled}
               data-testid={`featured-pick-${tile.slug}`}
               className={`relative text-left border rounded-md overflow-hidden transition-all bg-white ${
-                isSelected ? "border-clay ring-2 ring-clay" : "border-grout"
+                isSelected ? "border-gold ring-2 ring-gold" : "border-stone"
               } ${disabled ? "opacity-40 cursor-not-allowed" : "hover:-translate-y-1"}`}
             >
-              <div className="aspect-[4/3] bg-canvasAlt">
+              <div className="aspect-[4/3] bg-white">
                 <img src={resolveImageUrl(tile.images?.[0]?.thumb_url)} alt="" className="w-full h-full object-cover" />
               </div>
               <div className="p-3">
                 <p className="text-sm font-medium text-ink truncate">{tile.name}</p>
                 <p className="text-xs text-ink/60">{tile.sku}</p>
               </div>
-              {isSelected && <span className="absolute top-2 right-2 bg-clay text-canvas text-[10px] font-semibold px-2 py-0.5 rounded-full">Featured</span>}
+              {isSelected && <span className="absolute top-2 right-2 bg-navy text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">Featured</span>}
             </button>
           );
         })}
@@ -84,7 +84,7 @@ export default function FeaturedPicks() {
         onClick={save}
         disabled={saving}
         data-testid="featured-save-button"
-        className="mt-8 bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60"
+        className="mt-8 bg-navy text-white px-7 py-3 rounded-full hover:bg-gold transition-colors disabled:opacity-60"
       >
         {saving ? "Saving…" : "Save Featured Picks"}
       </button>

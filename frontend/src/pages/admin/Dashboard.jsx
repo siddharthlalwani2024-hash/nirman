@@ -26,9 +26,9 @@ export default function Dashboard() {
             key={c.label}
             to={c.to}
             data-testid={`dashboard-card-${c.label.toLowerCase().replace(/ /g, "-")}`}
-            className="bg-white border border-grout rounded-md p-6 hover:-translate-y-1 transition-transform"
+            className="bg-white border border-stone rounded-md p-6 hover:-translate-y-1 transition-transform"
           >
-            <p className="text-4xl font-serif text-clay">{c.value}</p>
+            <p className="text-4xl font-serif text-gold">{c.value}</p>
             <p className="text-ink/60 text-sm mt-1">{c.label}</p>
           </Link>
         ))}

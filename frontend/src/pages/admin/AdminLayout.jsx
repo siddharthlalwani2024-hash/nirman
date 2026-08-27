@@ -21,9 +21,9 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="min-h-screen flex bg-canvas">
-      <aside className="w-56 bg-ink text-canvas flex flex-col shrink-0">
-        <div className="px-6 py-6 font-serif text-xl border-b border-canvas/10">Nirman Udyog</div>
+    <div className="min-h-screen flex bg-ivory">
+      <aside className="w-56 bg-navy text-ivory flex flex-col shrink-0">
+        <div className="px-6 py-6 font-serif text-xl border-b border-ivory/10">Nirman Udyog</div>
         <nav className="flex-1 py-4">
           {links.map(({ to, label, icon: Icon, end }) => (
             <NavLink
@@ -32,14 +32,14 @@ export default function AdminLayout() {
               end={end}
               data-testid={`admin-nav-${label.toLowerCase().replace(/ /g, "-")}`}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-6 py-3 text-sm transition-colors ${isActive ? "bg-canvas/10 text-clay" : "text-canvas/70 hover:text-canvas hover:bg-canvas/5"}`
+                `flex items-center gap-3 px-6 py-3 text-sm transition-colors ${isActive ? "bg-ivory/10 text-gold" : "text-ivory/70 hover:text-ivory hover:bg-ivory/5"}`
               }
             >
               <Icon size={17} /> {label}
             </NavLink>
           ))}
         </nav>
-        <button onClick={handleLogout} data-testid="admin-logout-button" className="flex items-center gap-3 px-6 py-4 text-sm text-canvas/70 hover:text-canvas border-t border-canvas/10">
+        <button onClick={handleLogout} data-testid="admin-logout-button" className="flex items-center gap-3 px-6 py-4 text-sm text-ivory/70 hover:text-ivory border-t border-ivory/10">
           <LogOut size={17} /> Logout
         </button>
       </aside>

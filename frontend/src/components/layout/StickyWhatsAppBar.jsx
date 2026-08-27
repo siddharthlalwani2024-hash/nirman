@@ -21,7 +21,7 @@ export function StickyWhatsAppBar() {
         href={`tel:${settings.phone}`}
         data-testid="sticky-call-button"
         aria-label="Call now"
-        className="flex items-center justify-center w-10 h-10 rounded-full bg-canvas border border-grout text-ink shadow-soft hover:border-clay hover:text-clay transition-colors duration-200"
+        className="flex items-center justify-center w-10 h-10 rounded-full bg-ivory border border-stone text-ink shadow-soft hover:border-gold hover:text-gold transition-colors duration-200"
       >
         <Phone size={16} />
       </a>

@@ -26,8 +26,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-ink flex items-center justify-center px-4">
-      <form onSubmit={handleSubmit} data-testid="admin-login-form" className="bg-canvas rounded-md p-8 w-full max-w-sm">
+    <div className="min-h-screen bg-navy flex items-center justify-center px-4">
+      <form onSubmit={handleSubmit} data-testid="admin-login-form" className="bg-ivory rounded-md p-8 w-full max-w-sm">
         <h1 className="font-serif text-2xl text-ink mb-1">Nirman Udyog</h1>
         <p className="text-ink/60 text-sm mb-6">Admin sign in</p>
         {error && (
@@ -42,7 +42,7 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
           data-testid="login-email-input"
           required
-          className="w-full border border-grout rounded-md px-3 py-2.5 mb-4 bg-white focus:outline-none focus:ring-2 focus:ring-clay"
+          className="w-full border border-stone rounded-md px-3 py-2.5 mb-4 bg-white focus:outline-none focus:ring-2 focus:ring-gold"
         />
         <label className="block text-xs text-ink/60 uppercase tracking-wide mb-1">Password</label>
         <input
@@ -51,13 +51,13 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           data-testid="login-password-input"
           required
-          className="w-full border border-grout rounded-md px-3 py-2.5 mb-6 bg-white focus:outline-none focus:ring-2 focus:ring-clay"
+          className="w-full border border-stone rounded-md px-3 py-2.5 mb-6 bg-white focus:outline-none focus:ring-2 focus:ring-gold"
         />
         <button
           type="submit"
           disabled={loading}
           data-testid="login-submit-button"
-          className="w-full bg-clay text-canvas font-medium py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60"
+          className="w-full bg-navy text-white font-medium py-3 rounded-full hover:bg-gold transition-colors disabled:opacity-60"
         >
           {loading ? "Signing in…" : "Sign In"}
         </button>

@@ -32,7 +32,7 @@ export default function Gallery() {
     <div data-testid="gallery-page" className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
       <SEO title="Gallery" description="Real finished rooms — bathroom, kitchen, living, outdoor, wall and floor — using our tile range." />
       <div className="mb-8">
-        <p className="text-clay text-sm font-semibold tracking-widest uppercase mb-2">Look book</p>
+        <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-2">Look book</p>
         <h1 className="font-serif text-3xl sm:text-4xl text-ink">Finished Room Gallery</h1>
       </div>
       <div className="flex gap-2 flex-wrap mb-8">
@@ -42,7 +42,7 @@ export default function Gallery() {
             onClick={() => setRoomFilter(r)}
             data-testid={`gallery-filter-${r.toLowerCase()}`}
             className={`text-xs sm:text-sm px-4 py-2 rounded-full capitalize transition-colors ${
-              roomFilter === r ? "bg-clay text-canvas" : "bg-canvasAlt text-ink hover:bg-canvasAlt/70"
+              roomFilter === r ? "bg-navy text-white" : "bg-white text-ink hover:bg-white/70"
             }`}
           >
             {r}

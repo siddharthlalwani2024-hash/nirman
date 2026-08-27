@@ -13,7 +13,7 @@ export function TrustStrip() {
   ].filter(Boolean);
 
   return (
-    <section className="bg-cobalt text-white" data-testid="trust-strip">
+    <section className="bg-kajaria text-white" data-testid="trust-strip">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-7 sm:py-8 flex flex-wrap items-center justify-between gap-6 sm:gap-8">
         <div className="flex items-center gap-3">
           <ShieldCheck size={22} className="text-[#F4C542] shrink-0" />

@@ -8,7 +8,7 @@ const FAQS = [
   },
   {
     q: "Can I see the tile in a finished room before deciding?",
-    a: "Most tiles link to real demo photos from our showroom or past projects, so you can see the exact finish, grout line and lighting before you visit.",
+    a: "Most tiles link to real demo photos from our showroom or past projects, so you can see the exact finish, stone line and lighting before you visit.",
   },
   {
     q: "How do I get pricing?",
@@ -26,16 +26,16 @@ const FAQS = [
 
 export function FaqSection() {
   return (
-    <section className="bg-canvas py-16 sm:py-24" data-testid="faq-section">
+    <section className="bg-ivory py-16 sm:py-24" data-testid="faq-section">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <Reveal>
-          <p className="text-clay text-sm font-bold tracking-widest uppercase mb-2">Good to know</p>
+          <p className="text-gold text-sm font-bold tracking-widest uppercase mb-2">Good to know</p>
           <h2 className="font-serif text-3xl sm:text-4xl text-ink mb-8">Frequently asked questions</h2>
         </Reveal>
         <Reveal delay={0.08}>
           <Accordion type="single" collapsible data-testid="faq-accordion">
             {FAQS.map((item, i) => (
-              <AccordionItem key={item.q} value={`faq-${i}`} className="border-grout" data-testid={`faq-item-${i}`}>
+              <AccordionItem key={item.q} value={`faq-${i}`} className="border-stone" data-testid={`faq-item-${i}`}>
                 <AccordionTrigger className="font-serif text-base sm:text-lg text-ink hover:no-underline py-5">
                   {item.q}
                 </AccordionTrigger>

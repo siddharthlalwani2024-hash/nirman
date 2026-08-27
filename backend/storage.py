@@ -86,3 +86,10 @@ def process_and_upload_image(file_bytes: bytes, folder: str) -> dict:
         result = put_object(path, webp_bytes, "image/webp")
         paths[size_name] = result["path"]
     return {"id": image_id, "thumb": paths["thumb"], "medium": paths["medium"], "large": paths["large"]}
+
+
+def upload_pdf(file_bytes: bytes, folder: str = "catalogues") -> dict:
+    file_id = str(uuid.uuid4())
+    path = f"{APP_NAME}/{folder}/{file_id}.pdf"
+    result = put_object(path, file_bytes, "application/pdf")
+    return {"id": file_id, "path": result["path"], "size_bytes": len(file_bytes)}

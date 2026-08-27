@@ -12,36 +12,36 @@ export default function Contact() {
     <div data-testid="contact-page" className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
       <SEO title="Contact Us" description="Visit our showroom or reach us on WhatsApp and phone." />
       <div className="mb-10">
-        <p className="text-clay text-sm font-semibold tracking-widest uppercase mb-2">Get In Touch</p>
+        <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-2">Get In Touch</p>
         <h1 className="font-serif text-3xl sm:text-4xl text-ink">Visit the Showroom</h1>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-10">
         <div className="space-y-6">
           <div className="flex gap-4 items-start">
-            <MapPin className="text-clay shrink-0 mt-1" size={22} />
+            <MapPin className="text-gold shrink-0 mt-1" size={22} />
             <div>
               <p className="text-sm text-ink/60 uppercase tracking-wide mb-1">Address</p>
               <p className="text-ink" data-testid="contact-address">{settings.address}</p>
             </div>
           </div>
           <div className="flex gap-4 items-start">
-            <Clock className="text-clay shrink-0 mt-1" size={22} />
+            <Clock className="text-gold shrink-0 mt-1" size={22} />
             <div>
               <p className="text-sm text-ink/60 uppercase tracking-wide mb-1">Hours</p>
               <p className="text-ink" data-testid="contact-hours">{settings.hours}</p>
             </div>
           </div>
           <div className="flex gap-4 items-start">
-            <Phone className="text-clay shrink-0 mt-1" size={22} />
+            <Phone className="text-gold shrink-0 mt-1" size={22} />
             <div>
               <p className="text-sm text-ink/60 uppercase tracking-wide mb-1">Phone</p>
-              <a href={`tel:${settings.phone}`} data-testid="contact-call-link" className="text-ink hover:text-clay transition-colors">
+              <a href={`tel:${settings.phone}`} data-testid="contact-call-link" className="text-ink hover:text-gold transition-colors">
                 {settings.phone}
               </a>
             </div>
           </div>
-          <div className="bg-canvasAlt border border-grout rounded-lg p-6 mt-2">
+          <div className="bg-white border border-stone rounded-lg p-6 mt-2">
             <p className="text-xs text-ink/60 uppercase tracking-wide mb-4">Prefer to just message us?</p>
             <a
               href={waLink}
@@ -58,7 +58,7 @@ export default function Contact() {
             <a
               href={`tel:${settings.phone}`}
               data-testid="contact-call-cta"
-              className="flex items-center justify-center gap-2 text-sm text-ink/70 hover:text-clay transition-colors mt-4"
+              className="flex items-center justify-center gap-2 text-sm text-ink/70 hover:text-gold transition-colors mt-4"
             >
               <Phone size={15} /> or call {settings.phone}
             </a>
@@ -66,7 +66,7 @@ export default function Contact() {
         </div>
 
         {settings.map_embed_url && (
-          <div className="rounded-md overflow-hidden border border-grout aspect-square lg:aspect-auto lg:h-full min-h-[320px]">
+          <div className="rounded-md overflow-hidden border border-stone aspect-square lg:aspect-auto lg:h-full min-h-[320px]">
             <iframe
               title="Showroom location"
               src={settings.map_embed_url}

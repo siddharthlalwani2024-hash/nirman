@@ -57,7 +57,7 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
         }}
         onClick={() => inputRef.current?.click()}
         data-testid="image-upload-dropzone"
-        className={`border-2 border-dashed rounded-md p-8 text-center cursor-pointer transition-colors ${dragOver ? "border-clay bg-clay/5" : "border-grout"}`}
+        className={`border-2 border-dashed rounded-md p-8 text-center cursor-pointer transition-colors ${dragOver ? "border-gold bg-gold/5" : "border-stone"}`}
       >
         <input
           ref={inputRef}
@@ -74,7 +74,7 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
           </div>
         ) : (
           <div className="text-ink/60 text-sm flex flex-col items-center gap-2">
-            <Upload size={22} className="text-clay" />
+            <Upload size={22} className="text-gold" />
             Drag &amp; drop images here, or click to browse
           </div>
         )}
@@ -82,22 +82,22 @@ export function ImageUploader({ images = [], onChange, multiple = true, folder =
       {images.length > 0 && (
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mt-4">
           {images.map((img, i) => (
-            <div key={img.id || i} data-testid={`uploaded-image-${i}`} className="relative aspect-square rounded-md overflow-hidden border border-grout group">
+            <div key={img.id || i} data-testid={`uploaded-image-${i}`} className="relative aspect-square rounded-md overflow-hidden border border-stone group">
               <img src={resolveImageUrl(img.thumb_url || img.url)} alt="" className="w-full h-full object-cover" />
               <button
                 type="button"
                 onClick={() => removeAt(i)}
                 data-testid={`remove-image-${i}`}
-                className="absolute top-1 right-1 bg-ink/70 text-canvas rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-1 right-1 bg-navy/70 text-ivory rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
               >
                 <X size={12} />
               </button>
               {multiple && images.length > 1 && (
                 <div className="absolute bottom-1 left-1 right-1 flex justify-between opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button type="button" onClick={() => moveAt(i, -1)} data-testid={`move-left-${i}`} className="bg-ink/70 text-canvas rounded-full p-1">
+                  <button type="button" onClick={() => moveAt(i, -1)} data-testid={`move-left-${i}`} className="bg-navy/70 text-ivory rounded-full p-1">
                     <ChevronLeft size={12} />
                   </button>
-                  <button type="button" onClick={() => moveAt(i, 1)} data-testid={`move-right-${i}`} className="bg-ink/70 text-canvas rounded-full p-1">
+                  <button type="button" onClick={() => moveAt(i, 1)} data-testid={`move-right-${i}`} className="bg-navy/70 text-ivory rounded-full p-1">
                     <ChevronRight size={12} />
                   </button>
                 </div>

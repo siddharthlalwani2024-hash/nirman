@@ -8,24 +8,24 @@ export function Footer() {
   if (!settings) return null;
 
   return (
-    <footer className="bg-ink text-canvas mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+    <footer className="bg-navy text-ivory mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
         <div>
           {settings.logo_url ? (
-            <div className="inline-block bg-canvas rounded-md p-2 mb-3">
+            <div className="inline-block bg-ivory rounded-md p-2 mb-3">
               <img src={settings.logo_url} alt="Nirman Udyog logo" className="h-14 w-auto object-contain" />
             </div>
           ) : (
             <div className="font-serif text-2xl mb-3">{settings.business_name || "Nirman Udyog"}</div>
           )}
-          <p className="text-sm text-canvas/70 leading-relaxed">{settings.tagline}</p>
+          <p className="text-sm text-ivory/70 leading-relaxed">{settings.tagline}</p>
         </div>
         <div>
-          <div className="text-sm font-semibold uppercase tracking-wider text-canvas/50 mb-3">Explore</div>
+          <div className="text-sm font-semibold uppercase tracking-wider text-ivory/50 mb-3">Explore</div>
           <ul className="space-y-2 text-sm">
             {ROOMS.map((r) => (
               <li key={r.slug}>
-                <Link to={`/tiles/${r.slug}`} className="hover:text-sky-300 transition-colors" data-testid={`footer-room-${r.slug}`}>
+                <Link to={`/tiles/${r.slug}`} className="hover:text-gold transition-colors" data-testid={`footer-room-${r.slug}`}>
                   {r.name} Tiles
                 </Link>
               </li>
@@ -33,8 +33,28 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <div className="text-sm font-semibold uppercase tracking-wider text-canvas/50 mb-3">Visit</div>
-          <ul className="space-y-3 text-sm text-canvas/80">
+          <div className="text-sm font-semibold uppercase tracking-wider text-ivory/50 mb-3">Resources</div>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <Link to="/catalogues" className="hover:text-gold transition-colors" data-testid="footer-catalogues-link">
+                Catalogues
+              </Link>
+            </li>
+            <li>
+              <Link to="/gallery" className="hover:text-gold transition-colors">
+                Gallery
+              </Link>
+            </li>
+            <li>
+              <Link to="/blog" className="hover:text-gold transition-colors">
+                Journal
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div className="text-sm font-semibold uppercase tracking-wider text-ivory/50 mb-3">Visit</div>
+          <ul className="space-y-3 text-sm text-ivory/80">
             <li className="flex gap-2">
               <MapPin size={16} className="mt-0.5 shrink-0" />
               <span data-testid="footer-address">{settings.address}</span>
@@ -57,19 +77,19 @@ export function Footer() {
           )}
           <div className="flex gap-4">
             {settings.social_links?.facebook && (
-              <a href={settings.social_links.facebook} target="_blank" rel="noreferrer" data-testid="footer-facebook" className="text-canvas/70 hover:text-sky-300 transition-colors">
+              <a href={settings.social_links.facebook} target="_blank" rel="noreferrer" data-testid="footer-facebook" className="text-ivory/70 hover:text-gold transition-colors">
                 <Facebook size={18} />
               </a>
             )}
             {settings.social_links?.instagram && (
-              <a href={settings.social_links.instagram} target="_blank" rel="noreferrer" data-testid="footer-instagram" className="text-canvas/70 hover:text-sky-300 transition-colors">
+              <a href={settings.social_links.instagram} target="_blank" rel="noreferrer" data-testid="footer-instagram" className="text-ivory/70 hover:text-gold transition-colors">
                 <Instagram size={18} />
               </a>
             )}
           </div>
         </div>
       </div>
-      <div className="border-t border-canvas/10 py-5 text-center text-xs text-canvas/50">
+      <div className="border-t border-ivory/10 py-5 text-center text-xs text-ivory/50">
         © {new Date().getFullYear()} {settings.business_name || "Nirman Udyog"}. All rights reserved.
       </div>
     </footer>

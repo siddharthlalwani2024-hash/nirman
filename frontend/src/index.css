@@ -4,33 +4,29 @@
 
 body {
     margin: 0;
-    font-family: "Work Sans", sans-serif;
+    font-family: "Manrope", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f6f1e7;
-    color: #1b2a41;
+    background-color: #f5f2ec;
+    color: #171a1c;
 }
 
 h1, h2, h3, h4, .font-display {
-    font-family: "Fraunces", serif;
-}
-
-.font-mono, .stat-number, .sku-tag {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Cormorant Garamond", serif;
 }
 
 ::selection {
-    background-color: #b5502e;
-    color: #f6f1e7;
+    background-color: #b08a4a;
+    color: #171a1c;
 }
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: #b5502e #efe8d8;
+    scrollbar-color: #b08a4a #f5f2ec;
 }
 
 :focus-visible {
-    outline: 2px solid #b5502e;
+    outline: 2px solid #b08a4a;
     outline-offset: 2px;
     border-radius: 2px;
 }
@@ -46,17 +42,18 @@ h1, h2, h3, h4, .font-display {
     }
 }
 
-.corner-tick {
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    border-color: #f6f1e7;
-    opacity: 0.7;
+.gold-rule {
+    position: relative;
 }
-.corner-tick.tl { top: 20px; left: 20px; border-top: 2px solid; border-left: 2px solid; }
-.corner-tick.tr { top: 20px; right: 20px; border-top: 2px solid; border-right: 2px solid; }
-.corner-tick.bl { bottom: 20px; left: 20px; border-bottom: 2px solid; border-left: 2px solid; }
-.corner-tick.br { bottom: 20px; right: 20px; border-bottom: 2px solid; border-right: 2px solid; }
+.gold-rule::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    height: 1px;
+    width: 32px;
+    background-color: #b08a4a;
+}
 
 @layer base {
     :root {
@@ -88,14 +85,14 @@ h1, h2, h3, h4, .font-display {
         @apply border-border;
     }
     body {
-        @apply bg-canvas text-ink;
+        @apply bg-ivory text-ink;
     }
 }
 
 .lazy-img {
-    background-color: #efe8d8;
+    background-color: #ffffff;
 }
 
 .input {
-    @apply w-full border border-grout rounded-md px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-clay text-ink;
+    @apply w-full border border-stone rounded-md px-3 py-2.5 bg-white focus:outline-none focus:ring-2 focus:ring-gold text-ink;
 }

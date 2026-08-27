@@ -59,7 +59,7 @@ export default function BlogForm() {
         <label className="flex items-center gap-2 text-sm text-ink">
           <input type="checkbox" data-testid="blog-form-published" checked={form.published} onChange={(e) => set("published", e.target.checked)} /> Published
         </label>
-        <button type="submit" disabled={saving} data-testid="blog-form-submit" className="bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
+        <button type="submit" disabled={saving} data-testid="blog-form-submit" className="bg-navy text-white px-7 py-3 rounded-full hover:bg-gold transition-colors disabled:opacity-60">
           {saving ? "Saving…" : "Save Post"}
         </button>
       </form>

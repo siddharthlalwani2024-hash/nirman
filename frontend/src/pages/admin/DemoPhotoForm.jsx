@@ -63,14 +63,14 @@ export default function DemoPhotoForm() {
           <input data-testid="demo-photo-form-caption" value={form.caption} onChange={(e) => set("caption", e.target.value)} className="input" />
         </Field>
         <Field label="Tiles used in this look">
-          <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto border border-grout rounded-md p-3">
+          <div className="flex flex-wrap gap-2 max-h-56 overflow-y-auto border border-stone rounded-md p-3">
             {tiles.map((t) => (
               <button
                 type="button"
                 key={t.id}
                 onClick={() => toggleTile(t.id)}
                 data-testid={`demo-photo-tile-option-${t.slug}`}
-                className={`text-xs px-3 py-1.5 rounded-full ${form.tile_ids.includes(t.id) ? "bg-clay text-canvas" : "bg-canvasAlt text-ink"}`}
+                className={`text-xs px-3 py-1.5 rounded-full ${form.tile_ids.includes(t.id) ? "bg-navy text-white" : "bg-white text-ink"}`}
               >
                 {t.name}
               </button>
@@ -80,7 +80,7 @@ export default function DemoPhotoForm() {
         <label className="flex items-center gap-2 text-sm text-ink">
           <input type="checkbox" data-testid="demo-photo-form-published" checked={form.published} onChange={(e) => set("published", e.target.checked)} /> Published
         </label>
-        <button type="submit" disabled={saving} data-testid="demo-photo-form-submit" className="bg-clay text-canvas px-7 py-3 rounded-full hover:bg-claydark transition-colors disabled:opacity-60">
+        <button type="submit" disabled={saving} data-testid="demo-photo-form-submit" className="bg-navy text-white px-7 py-3 rounded-full hover:bg-gold transition-colors disabled:opacity-60">
           {saving ? "Saving…" : "Save Photo"}
         </button>
       </form>

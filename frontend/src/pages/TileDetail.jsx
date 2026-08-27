@@ -45,7 +45,7 @@ export default function TileDetail() {
 
       <div className="grid lg:grid-cols-2 gap-10">
         <div>
-          <div className="aspect-square bg-canvasAlt rounded-md overflow-hidden mb-3">
+          <div className="aspect-square bg-white rounded-md overflow-hidden mb-3">
             {tile.images?.[activeIndex] && (
               <img
                 src={resolveImageUrl(tile.images[activeIndex].url)}
@@ -65,7 +65,7 @@ export default function TileDetail() {
                   key={img.id}
                   onClick={() => setActiveIndex(i)}
                   data-testid={`tile-thumbnail-${i}`}
-                  className={`w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 ${i === activeIndex ? "border-cobalt" : "border-transparent"}`}
+                  className={`w-20 h-20 rounded-md overflow-hidden shrink-0 border-2 ${i === activeIndex ? "border-kajaria" : "border-transparent"}`}
                 >
                   <img src={resolveImageUrl(img.thumb_url)} alt={img.alt_text || `${tile.name} view ${i + 1}`} className="w-full h-full object-cover" />
                 </button>
@@ -76,13 +76,13 @@ export default function TileDetail() {
 
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-cobalt bg-cobalt/10 rounded-full px-3 py-1">{tile.type}</span>
-            {tile.is_kajaria && <span className="inline-block text-[11px] font-semibold text-white bg-cobalt rounded-full px-3 py-1">Kajaria</span>}
+            <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-kajaria bg-kajaria/10 rounded-full px-3 py-1">{tile.type}</span>
+            {tile.is_kajaria && <span className="inline-block text-[11px] font-semibold text-white bg-kajaria rounded-full px-3 py-1">Kajaria</span>}
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl text-ink mb-2" data-testid="tile-name">{tile.name}</h1>
           <p className="text-sm text-ink/60 mb-6" data-testid="tile-sku">SKU: {tile.sku}</p>
 
-          <dl className="grid grid-cols-2 gap-4 mb-6 border-y border-grout py-5">
+          <dl className="grid grid-cols-2 gap-4 mb-6 border-y border-stone py-5">
             <div>
               <dt className="text-xs text-ink/60 uppercase tracking-wide">Size</dt>
               <dd className="text-ink font-medium">{tile.size}</dd>
@@ -95,7 +95,7 @@ export default function TileDetail() {
               <dt className="text-xs text-ink/60 uppercase tracking-wide mb-1">Suited for</dt>
               <dd className="flex gap-2 flex-wrap">
                 {tile.rooms?.map((r) => (
-                  <Link key={r} to={`/tiles/${r}`} className="text-xs bg-canvasAlt text-ink px-2.5 py-1 rounded-full capitalize hover:bg-clay hover:text-canvas transition-colors">
+                  <Link key={r} to={`/tiles/${r}`} className="text-xs bg-white text-ink px-2.5 py-1 rounded-full capitalize hover:bg-gold hover:text-white transition-colors">
                     {r}
                   </Link>
                 ))}
@@ -105,7 +105,7 @@ export default function TileDetail() {
 
           {tile.description && <p className="text-ink/90 leading-relaxed mb-8">{tile.description}</p>}
 
-          <div className="bg-canvasAlt border border-grout rounded-lg p-5">
+          <div className="bg-white border border-stone rounded-lg p-5">
             <p className="text-xs text-ink/60 uppercase tracking-wide mb-3">Interested in this tile?</p>
             <a
               href={waLink}
@@ -123,7 +123,7 @@ export default function TileDetail() {
               <a
                 href={`tel:${settings.phone}`}
                 data-testid="tile-call-cta"
-                className="flex items-center justify-center gap-2 text-sm text-ink/70 hover:text-clay transition-colors mt-3"
+                className="flex items-center justify-center gap-2 text-sm text-ink/70 hover:text-gold transition-colors mt-3"
               >
                 <Phone size={15} /> or call {settings.phone}
               </a>
@@ -141,7 +141,7 @@ export default function TileDetail() {
                 key={photo.id}
                 onClick={() => setLightboxPhoto(photo)}
                 data-testid={`tile-demo-photo-${photo.id}`}
-                className="aspect-[4/5] rounded-md overflow-hidden bg-canvasAlt"
+                className="aspect-[4/5] rounded-md overflow-hidden bg-white"
               >
                 <img
                   src={resolveImageUrl(photo.image.medium_url)}

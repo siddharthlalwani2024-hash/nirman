@@ -11,6 +11,7 @@ import { Reveal } from "../components/Reveal";
 import { StatCounters } from "../components/StatCounters";
 import { ComparisonBlock } from "../components/ComparisonBlock";
 import { FaqSection } from "../components/FaqSection";
+import { CataloguePreview } from "../components/CataloguePreview";
 import { useSettings } from "../context/SettingsContext";
 import { ROOMS } from "../constants/rooms";
 
@@ -41,7 +42,7 @@ export default function Home() {
     <div data-testid="home-page">
       <SEO title="Home" description={settings?.tagline} />
 
-      <section className="relative h-[78vh] min-h-[480px] max-h-[720px] flex items-end overflow-hidden">
+      <section className="relative h-[86vh] min-h-[520px] max-h-[780px] flex flex-col justify-end overflow-hidden">
         <AnimatePresence>
           {heroImage && (
             <motion.img
@@ -49,53 +50,78 @@ export default function Home() {
               src={resolveImageUrl(heroImage)}
               alt="Nirman Udyog showroom finished room"
               className="absolute inset-0 w-full h-full object-cover"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, scale: 1.0 }}
+              animate={{ opacity: 1, scale: 1.04 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ opacity: { duration: 1 }, scale: { duration: 8, ease: "linear" } }}
             />
           )}
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/60 to-ink/10" />
-        <span className="corner-tick tl hidden sm:block" />
-        <span className="corner-tick tr hidden sm:block" />
-        <span className="corner-tick bl hidden sm:block" />
-        <span className="corner-tick br hidden sm:block" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-14 sm:pb-20 w-full">
-          <p className="text-brass text-xs sm:text-sm font-bold tracking-[0.2em] uppercase mb-3">Authorized Kajaria Dealer · Cooch Behar</p>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-canvas leading-none max-w-2xl">
-            {settings?.tagline || "Tiles that finish the room, not just cover the floor."}
-          </h1>
-          <div className="mt-8 flex flex-wrap gap-3">
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/60 to-navy/10" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-10 w-full">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="text-gold text-xs sm:text-sm font-bold tracking-[0.2em] uppercase mb-3"
+          >
+            Authorized Kajaria Dealer · Cooch Behar
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="font-serif text-4xl sm:text-5xl lg:text-6xl text-ivory leading-none max-w-2xl"
+          >
+            {settings?.tagline || "Surfaces that define space."}
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-8 flex flex-wrap gap-3"
+          >
             <Link
               to="/gallery"
               data-testid="hero-cta-gallery"
-              className="bg-clay text-canvas font-medium px-7 py-3.5 rounded-full hover:bg-claydark transition-colors duration-200"
+              className="bg-navy text-white font-medium px-7 py-3.5 rounded-sm hover:bg-gold transition-colors duration-200"
             >
-              See Finished Rooms
+              Explore Collections
             </Link>
             <Link
-              to="/tiles/bathroom"
-              data-testid="hero-cta-bathroom"
-              className="border border-canvas/50 text-canvas font-medium px-7 py-3.5 rounded-full hover:bg-canvas/10 hover:border-canvas transition-colors duration-200 backdrop-blur-sm"
+              to="/catalogues"
+              data-testid="hero-cta-catalogues"
+              className="border border-ivory/50 text-ivory font-medium px-7 py-3.5 rounded-sm hover:bg-ivory/10 hover:border-ivory transition-colors duration-200 backdrop-blur-sm"
             >
-              Browse Bathroom Tiles
+              View Catalogues
             </Link>
-          </div>
+          </motion.div>
           {heroImages.length > 1 && (
-            <div className="flex gap-2 mt-10" data-testid="hero-slideshow-dots">
+            <div className="flex gap-2 mt-8" data-testid="hero-slideshow-dots">
               {heroImages.map((_, i) => (
                 <button
                   key={i}
                   aria-label={`Show hero image ${i + 1}`}
                   data-testid={`hero-dot-${i}`}
                   onClick={() => setHeroIndex(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${i === heroIndex ? "w-8 bg-brass" : "w-4 bg-canvas/40 hover:bg-canvas/60"}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${i === heroIndex ? "w-8 bg-gold" : "w-4 bg-ivory/40 hover:bg-ivory/60"}`}
                 />
               ))}
             </div>
           )}
         </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="relative z-10 border-t border-ivory/15 max-w-7xl mx-auto w-full px-4 sm:px-6 py-4 flex flex-wrap gap-x-8 gap-y-1 text-[11px] sm:text-xs font-semibold tracking-[0.15em] uppercase text-ivory/70"
+        >
+          <span>Premium Surfaces</span>
+          <span className="text-gold">·</span>
+          <span>Cooch Behar &amp; Nearby</span>
+          <span className="text-gold">·</span>
+          <span>Design-Led Collections</span>
+        </motion.div>
       </section>
 
       <TrustStrip />
@@ -103,8 +129,8 @@ export default function Home() {
       <Reveal>
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
           <div className="mb-10">
-            <p className="text-clay text-sm font-bold tracking-widest uppercase mb-2">Shop by room</p>
-            <h2 className="font-serif text-3xl sm:text-4xl text-ink">Find tiles for every space</h2>
+            <p className="text-gold text-sm font-bold tracking-widest uppercase mb-2">Shop by application</p>
+            <h2 className="font-serif text-3xl sm:text-4xl text-ink">Designed around the way you live.</h2>
           </div>
           <div className="grid gap-4 sm:gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))" }}>
             {roomCards.map((cat, idx) => (
@@ -112,30 +138,30 @@ export default function Home() {
                 key={cat.slug}
                 to={`/tiles/${cat.slug}`}
                 data-testid={`room-category-card-${cat.slug}`}
-                className="group relative aspect-[4/5] rounded-md overflow-hidden bg-canvasAlt block shadow-soft hover:shadow-lift transition-shadow duration-300"
+                className="group relative aspect-[4/5] rounded-sm overflow-hidden bg-white block border border-stone shadow-soft hover:shadow-md transition-shadow duration-300"
               >
                 {cat.hero_image && (
                   <img
                     src={resolveImageUrl(cat.hero_image)}
                     alt={`${cat.name} tiles`}
                     loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/10 to-transparent" />
                 {idx === ribbonIndex && (
-                  <span className="absolute top-3 right-0 bg-brass text-ink text-[10px] font-semibold tracking-wide uppercase px-3 py-1 rounded-l-full shadow-md">
+                  <span className="absolute top-3 right-0 bg-gold text-ink text-[10px] font-semibold tracking-wide uppercase px-3 py-1 rounded-l-full shadow-md">
                     Kajaria Featured
                   </span>
                 )}
                 <div className="absolute bottom-0 left-0 p-4 flex items-center gap-1.5">
-                  <span className="relative font-serif text-xl sm:text-2xl text-canvas">
+                  <span className="relative font-serif text-xl sm:text-2xl text-ivory">
                     {cat.name}
-                    <span className="absolute left-0 -bottom-1 h-[2px] bg-grout w-full">
-                      <span className="absolute inset-0 bg-clay origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
+                    <span className="absolute left-0 -bottom-1 h-[1px] bg-ivory/30 w-full">
+                      <span className="absolute inset-0 bg-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                     </span>
                   </span>
-                  <Check size={16} className="text-brass opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <Check size={16} className="text-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </Link>
             ))}
@@ -147,13 +173,13 @@ export default function Home() {
 
       {settings?.premium_collections?.length > 0 && (
         <Reveal>
-          <section className="bg-ink py-10 sm:py-14">
+          <section className="bg-navy py-10 sm:py-14">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-              <p className="text-brass text-xs font-bold tracking-widest uppercase mb-6 text-center sm:text-left">Premium Kajaria Collections</p>
+              <p className="text-gold text-xs font-bold tracking-widest uppercase mb-6 text-center sm:text-left">Premium Kajaria Collections</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
                 {settings.premium_collections.map((c, i) => (
                   <div key={c.name} className={`pt-4 sm:pt-0 text-center sm:text-left ${i > 0 ? "sm:pl-10" : ""}`}>
-                    <p className="font-serif text-xl sm:text-2xl text-canvas">{c.name}</p>
+                    <p className="font-serif text-xl sm:text-2xl text-ivory">{c.name}</p>
                     <p className="text-xs text-white/50 mt-1">{c.tagline}</p>
                   </div>
                 ))}
@@ -173,9 +199,9 @@ export default function Home() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute bottom-0 left-0 bg-ink text-canvas px-5 py-3 sm:px-8 sm:py-4">
+            <div className="absolute bottom-0 left-0 bg-navy text-ivory px-5 py-3 sm:px-8 sm:py-4">
               <p className="font-serif text-lg sm:text-xl">Kajaria Galaxy — Our Exhibition Centre</p>
-              {settings.years_in_business && <p className="text-xs text-canvas/70 mt-0.5">{settings.years_in_business} years in the industry</p>}
+              {settings.years_in_business && <p className="text-xs text-ivory/70 mt-0.5">{settings.years_in_business} years in the industry</p>}
             </div>
           </section>
         </Reveal>
@@ -183,10 +209,10 @@ export default function Home() {
 
       {featured.length > 0 && (
         <Reveal>
-          <section className="bg-canvas py-16 sm:py-20">
+          <section className="bg-ivory py-16 sm:py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
               <div className="mb-10">
-                <p className="text-clay text-sm font-bold tracking-widest uppercase mb-2">Handpicked</p>
+                <p className="text-gold text-sm font-bold tracking-widest uppercase mb-2">Handpicked</p>
                 <h2 className="font-serif text-3xl sm:text-4xl text-ink">Featured tiles</h2>
               </div>
               <div className="grid gap-5 sm:gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
@@ -199,6 +225,7 @@ export default function Home() {
         </Reveal>
       )}
 
+      <CataloguePreview />
       <ComparisonBlock />
       <FaqSection />
     </div>

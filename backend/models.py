@@ -15,6 +15,7 @@ ROOMS = [
 ]
 ROOM_SLUGS = [r["slug"] for r in ROOMS]
 TILE_TYPES = ["PVT", "GVT", "Ceramic"]
+CATALOGUE_CATEGORIES = ["Ceramic", "GVT", "PVT", "Gres"]
 
 
 def new_id() -> str:
@@ -126,3 +127,22 @@ class BlogUpdate(BlogCreate):
 class LoginRequest(BaseModel):
     email: str
     password: str
+
+
+class CatalogueCreate(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    title: str
+    category: str
+    year: Optional[int] = None
+    cover_image: Optional[str] = ""
+    pdf_url: Optional[str] = ""
+    description: Optional[str] = ""
+    page_count: Optional[int] = None
+    file_size_mb: Optional[float] = None
+    featured: bool = False
+    published: bool = True
+
+
+class CatalogueUpdate(CatalogueCreate):
+    title: Optional[str] = None
+    category: Optional[str] = None

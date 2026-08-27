@@ -39,7 +39,7 @@ export function StatCounters({ settings }) {
   if (stats.length === 0) return null;
 
   return (
-    <section className="bg-ink py-16 sm:py-20" data-testid="stat-counters-section">
+    <section className="bg-navy py-16 sm:py-20" data-testid="stat-counters-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-10">
           {stats.map((s, i) => (
@@ -52,10 +52,10 @@ export function StatCounters({ settings }) {
               className="text-center sm:text-left border-t border-white/10 pt-5 sm:pt-6"
               data-testid={`stat-counter-${i}`}
             >
-              <p className="text-3xl sm:text-5xl text-brass leading-none">
+              <p className="text-3xl sm:text-5xl text-gold leading-none">
                 <CountUp target={s.value} suffix={s.suffix} />
               </p>
-              <p className="text-xs sm:text-sm text-canvas/60 mt-2 tracking-wide uppercase">{s.label}</p>
+              <p className="text-xs sm:text-sm text-ivory/60 mt-2 tracking-wide uppercase">{s.label}</p>
             </motion.div>
           ))}
         </div>
