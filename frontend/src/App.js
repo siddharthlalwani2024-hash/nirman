@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import RoomCategory from "./pages/RoomCategory";
 import TileDetail from "./pages/TileDetail";
 import Gallery from "./pages/Gallery";
+import Catalogues from "./pages/Catalogues";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
@@ -27,6 +28,8 @@ import TileForm from "./pages/admin/TileForm";
 import FeaturedPicks from "./pages/admin/FeaturedPicks";
 import DemoPhotosList from "./pages/admin/DemoPhotosList";
 import DemoPhotoForm from "./pages/admin/DemoPhotoForm";
+import CataloguesList from "./pages/admin/CataloguesList";
+import CatalogueForm from "./pages/admin/CatalogueForm";
 import AdminSettings from "./pages/admin/AdminSettings";
 import BlogList from "./pages/admin/BlogList";
 import BlogForm from "./pages/admin/BlogForm";
@@ -45,6 +48,7 @@ function App() {
                   <Route path="/tiles/:room" element={<RoomCategory />} />
                   <Route path="/tile/:slug" element={<TileDetail />} />
                   <Route path="/gallery" element={<Gallery />} />
+                  <Route path="/catalogues" element={<Catalogues />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/blog" element={<Blog />} />
@@ -68,6 +72,9 @@ function App() {
                   <Route path="demo-photos" element={<DemoPhotosList />} />
                   <Route path="demo-photos/new" element={<DemoPhotoForm />} />
                   <Route path="demo-photos/:id/edit" element={<DemoPhotoForm />} />
+                  <Route path="catalogues" element={<CataloguesList />} />
+                  <Route path="catalogues/new" element={<CatalogueForm />} />
+                  <Route path="catalogues/:id/edit" element={<CatalogueForm />} />
                   <Route path="blog" element={<BlogList />} />
                   <Route path="blog/new" element={<BlogForm />} />
                   <Route path="blog/:id/edit" element={<BlogForm />} />

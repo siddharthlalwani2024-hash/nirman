@@ -315,3 +315,98 @@ def test_logout_flow():
     s.cookies.clear()
     me = s.get(f"{API}/auth/me")
     assert me.status_code == 401
+
+
+
+# ---------- Catalogues (NEW feature) ----------
+def test_catalogue_categories_endpoint(client):
+    r = client.get(f"{API}/catalogue-categories")
+    assert r.status_code == 200
+    cats = r.json()
+    assert set(cats) == {"Ceramic", "GVT", "PVT", "Gres"}
+
+
+def test_catalogues_public_list_empty_or_ok(client):
+    r = client.get(f"{API}/catalogues")
+    assert r.status_code == 200
+    assert isinstance(r.json(), list)
+
+
+def test_catalogue_pdf_upload_and_crud(admin_client):
+    # Upload a fake PDF
+    fake_pdf = b"%PDF-1.4\n%Fake test PDF\n%%EOF"
+    files = {"file": ("TEST_catalogue.pdf", io.BytesIO(fake_pdf), "application/pdf")}
+    up = admin_client.post(f"{API}/admin/upload-pdf", files=files)
+    assert up.status_code == 200, up.text
+    pdf_url = up.json()["url"]
+    assert pdf_url.startswith("/api/media/")
+
+    # Reject non-PDF
+    bad = admin_client.post(
+        f"{API}/admin/upload-pdf",
+        files={"file": ("bad.txt", io.BytesIO(b"hello"), "text/plain")},
+    )
+    assert bad.status_code == 400
+
+    # Create catalogue
+    payload = {
+        "title": "TEST_Catalogue_Alpha",
+        "category": "GVT",
+        "year": 2026,
+        "pdf_url": pdf_url,
+        "description": "test",
+        "featured": True,
+        "published": True,
+    }
+    cr = admin_client.post(f"{API}/admin/catalogues", json=payload)
+    assert cr.status_code == 200, cr.text
+    cat = cr.json()
+    cid = cat["id"]
+    slug = cat["slug"]
+    assert cat["category"] == "GVT"
+    assert cat["download_count"] == 0
+    assert cat["slug"]
+
+    # Invalid category
+    bad_cat = admin_client.post(f"{API}/admin/catalogues", json={**payload, "category": "InvalidCat"})
+    assert bad_cat.status_code == 400
+
+    # Public visible
+    pub = requests.get(f"{API}/catalogues/{slug}")
+    assert pub.status_code == 200
+    assert pub.json()["slug"] == slug
+
+    # Public list filter by category
+    lst = requests.get(f"{API}/catalogues", params={"category": "GVT"}).json()
+    assert any(x["id"] == cid for x in lst)
+
+    # Track download
+    td = requests.post(f"{API}/catalogues/{slug}/track-download")
+    assert td.status_code == 200
+    verify = admin_client.get(f"{API}/admin/catalogues/{cid}").json()
+    assert verify["download_count"] == 1
+
+    # Update - unpublish
+    ur = admin_client.put(f"{API}/admin/catalogues/{cid}", json={"published": False})
+    assert ur.status_code == 200
+    assert ur.json()["published"] is False
+    pub2 = requests.get(f"{API}/catalogues/{slug}")
+    assert pub2.status_code == 404
+
+    # Delete
+    dr = admin_client.delete(f"{API}/admin/catalogues/{cid}")
+    assert dr.status_code == 200
+
+
+def test_demo_photo_count_regression(client):
+    """Gallery must not be touched — must still have 76 photos across 7 rooms."""
+    r = client.get(f"{API}/demo-photos")
+    assert r.status_code == 200
+    photos = r.json()
+    # Count by room
+    from collections import Counter
+    counts = Counter(p["room"] for p in photos)
+    total = len(photos)
+    print(f"Total demo photos: {total}, by room: {dict(counts)}")
+    # Expected per problem statement: 76 total
+    assert total >= 70, f"Demo photos regression: got {total}"

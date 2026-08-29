@@ -11,12 +11,12 @@ deep link pre-filled with tile name + SKU is the single highest-leverage detail.
 
 ## Architecture
 - Frontend: React (CRA, JS — Vite/TS requested but environment is fixed to CRA) + Tailwind + Framer Motion + react-router-dom v7 + react-helmet-async for SEO
-- Backend: FastAPI, routers split as auth_router / content_router / upload_router
+- Backend: FastAPI, routers split as auth_router / content_router / upload_router / catalogue_router
 - DB: MongoDB (uuid string ids, no raw ObjectId ever returned)
 - Auth: JWT via httpOnly cookies (access 60min / refresh 7d), single seeded admin, brute-force lockout (5 attempts/15min)
 - Images: Emergent object storage, Pillow WebP conversion → thumb/medium/large sizes on every admin upload, served via public `/api/media/{path}`
-- Colors: Bone/Greige/Charcoal/Taupe/Clay (brand) locked exactly per user spec; Kajaria blue (#15508B) restricted to trust-strip + footer dealer badge only; WhatsApp green for WA CTAs only
-- Fonts: Playfair Display (headings) + Manrope (body)
+- Colors: Navy/Ivory/Gold/Stone (brand, per master design spec, 2026-08-29 rebrand) locked exactly per user spec; Kajaria blue (#15508B) restricted to trust-strip + footer dealer badge only; WhatsApp green for WA CTAs only
+- Fonts: Cormorant Garamond (headings) + Manrope (body)
 
 ## User Personas
 - Homeowners/small contractors from paid ads (primary) — mobile, want finished-room photos, message on WhatsApp
@@ -36,6 +36,15 @@ deep link pre-filled with tile name + SKU is the single highest-leverage detail.
 - Business info seeded: phone 9475833221, WhatsApp +919475833221, address (Cooch Behar, WB), hours Mon–Sun 9am–8pm, Authorized Kajaria Dealer badge (blue, restricted per spec)
 - Tested by testing_agent: 27/27 backend pytest tests pass, all critical frontend flows verified (100%). No blocking issues.
 - Admin credentials: siddharth.lalwani2024@vitstudent.ac.in / NirmanUdyog@2026 (in /app/memory/test_credentials.md)
+
+## What's Been Implemented (2026-08-29, full rebrand + catalogue library)
+- Full rebrand per user's "master design spec" md doc: new tokens Navy #102A43 (brand/dark-section/primary-btn), Ivory #F5F2EC (page bg), Gold #B08A4A (accent/hover/badges), Stone #D9D5CC (borders), White (card surfaces), Ink #171A1C (body text, same token name reused with new hex — minimal-diff rename). Fonts: Cormorant Garamond (serif) + Manrope (sans), replacing Fraunces/Work Sans/IBM Plex Mono. Consolidated duplicate "cobalt" token into "kajaria" (real Kajaria-blue, restricted to TrustStrip + dealer badge only). Deliberately kept React CRA + FastAPI + Mongo stack rather than migrating to Next.js/TS (spec's suggested stack) — no user-visible benefit, high risk.
+- Navbar: transparent-over-hero on homepage top, ivory+blur on scroll/other pages. Hero: staggered fade-up motion timeline, slow bg zoom, auto-rotating multi-image slideshow with dots, new bottom "Premium Surfaces · Cooch Behar & Nearby · Design-Led Collections" metadata row.
+- NEW Catalogue Library feature: admin uploads a PDF (+ optional cover) tagged Ceramic/GVT/PVT/Gres via `/admin/catalogues` (PdfUploader component, `/api/admin/upload-pdf`, object-storage backed, 30MB cap) — instantly live on public `/catalogues` page + homepage preview section. Direct View+Download, NO lead-capture form (user's explicit choice). Download tracked via `download_count`.
+- Footer: new 5-column layout with "Resources" column (Catalogues/Gallery/Journal).
+- Tested by testing_agent: 31/31 backend pytest (100%), 100% of critical frontend flows, zero leftover old-token/broken-styling regressions across all public+admin pages. Confirmed all 76 real showroom demo photos in Gallery untouched (explicit user concern this session). Fixed post-test: catalogue slug collision handling.
+- NOT built (deferred as Phase 2/3 per spec's own priority list — communicate to user before starting): mega menu, dedicated Projects/Where-to-Buy/Collections-as-entity pages, product search overlay, lead-capture gating on downloads.
+
 
 ## What's Been Implemented (2026-08-16)
 - Added "Bedroom" as a 7th room category (found real photos in a "Bedroom" folder inside the user's content-staging.zip that were never imported since original spec fixed rooms to 6). Added to ROOMS in backend `models.py` + frontend `constants/rooms.js`, inserted `categories` doc (hero image = real showroom bedroom display photo), uploaded & created 5 `demo_photos` (room=bedroom) via admin upload API. No tile SKUs tagged "bedroom" yet (admin can tag via Tile Form, which now shows Bedroom as an option automatically). Also fixed sticky WhatsApp bar (was full-width bar, now a compact floating pill FAB bottom-right) and Contact page CTA hierarchy, plus added `ScrollToTop` on route change (was landing on footer after nav).

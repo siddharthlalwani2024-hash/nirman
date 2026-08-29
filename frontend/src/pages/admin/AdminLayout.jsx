@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Grid3x3, Image, Newspaper, Settings, LogOut, Star } from "lucide-react";
+import { LayoutDashboard, Grid3x3, Image, Newspaper, Settings, LogOut, Star, FileText } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 const links = [
@@ -7,6 +7,7 @@ const links = [
   { to: "/admin/tiles", label: "Tiles", icon: Grid3x3 },
   { to: "/admin/featured-picks", label: "Featured Picks", icon: Star },
   { to: "/admin/demo-photos", label: "Demo Photos", icon: Image },
+  { to: "/admin/catalogues", label: "Catalogues", icon: FileText },
   { to: "/admin/blog", label: "Blog", icon: Newspaper },
   { to: "/admin/settings", label: "Settings", icon: Settings },
 ];

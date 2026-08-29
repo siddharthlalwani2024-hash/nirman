@@ -51,6 +51,7 @@ async def lifespan(app: FastAPI):
     await db.login_attempts.create_index("identifier")
     await db.tiles.create_index("slug", unique=True)
     await db.blog_posts.create_index("slug", unique=True)
+    await db.catalogues.create_index("slug", unique=True)
     await seed_admin()
     await seed_content(db)
     try:
@@ -75,10 +76,12 @@ app.add_middleware(
 from routers.auth_router import router as auth_router
 from routers.content_router import router as content_router
 from routers.upload_router import router as upload_router
+from routers.catalogue_router import router as catalogue_router
 
 app.include_router(auth_router)
 app.include_router(content_router)
 app.include_router(upload_router)
+app.include_router(catalogue_router)
 
 
 @app.get("/api")

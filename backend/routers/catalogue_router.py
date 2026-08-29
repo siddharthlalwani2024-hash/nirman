@@ -73,7 +73,13 @@ async def create_catalogue(payload: CatalogueCreate, user=Depends(get_current_us
         raise HTTPException(status_code=400, detail=f"Category must be one of {CATALOGUE_CATEGORIES}")
     doc = payload.model_dump()
     doc["id"] = new_id()
-    doc["slug"] = slugify(f"{payload.title}-{payload.category}")
+    base_slug = slugify(f"{payload.title}-{payload.category}")
+    slug = base_slug
+    suffix = 2
+    while await db.catalogues.find_one({"slug": slug}):
+        slug = f"{base_slug}-{suffix}"
+        suffix += 1
+    doc["slug"] = slug
     doc["download_count"] = 0
     doc["created_at"] = now_iso()
     doc["updated_at"] = now_iso()
@@ -94,7 +100,13 @@ async def update_catalogue(catalogue_id: str, payload: CatalogueUpdate, user=Dep
     if "title" in update_data or "category" in update_data:
         title = update_data.get("title", existing["title"])
         category = update_data.get("category", existing["category"])
-        update_data["slug"] = slugify(f"{title}-{category}")
+        base_slug = slugify(f"{title}-{category}")
+        slug = base_slug
+        suffix = 2
+        while slug != existing.get("slug") and await db.catalogues.find_one({"slug": slug}):
+            slug = f"{base_slug}-{suffix}"
+            suffix += 1
+        update_data["slug"] = slug
     update_data["updated_at"] = now_iso()
     await db.catalogues.update_one({"id": catalogue_id}, {"$set": update_data})
     return _strip(await db.catalogues.find_one({"id": catalogue_id}, {"_id": 0}))
