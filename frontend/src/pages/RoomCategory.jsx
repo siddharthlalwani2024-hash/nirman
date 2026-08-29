@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { api } from "../lib/api";
 import { resolveImageUrl } from "../lib/image";
+import { displayCaption } from "../lib/caption";
 import { SEO } from "../components/SEO";
 import { TileCard } from "../components/TileCard";
 import { Lightbox } from "../components/Lightbox";
@@ -47,30 +48,46 @@ export default function RoomCategory() {
       {photos.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
           <h2 className="font-serif text-2xl sm:text-3xl text-ink mb-6">See the look</h2>
-          <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
-            {photos.map((photo) => (
-              <div key={photo.id} data-testid={`room-look-card-${photo.id}`} className="bg-white/60 border border-stone rounded-md overflow-hidden flex flex-col sm:flex-row">
-                <button onClick={() => setLightboxPhoto(photo)} className="sm:w-1/2 aspect-[4/3] sm:aspect-auto shrink-0 overflow-hidden bg-white">
-                  <img
-                    src={resolveImageUrl(photo.image.medium_url)}
-                    alt={photo.image.alt_text || photo.caption}
-                    loading="lazy"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                </button>
-                <div className="p-4 flex-1">
-                  <p className="text-sm text-ink mb-3">{photo.caption}</p>
-                  <p className="text-xs text-ink/60 uppercase tracking-wide mb-2">Tiles used</p>
-                  <div className="flex flex-wrap gap-2">
-                    {tiles.filter((t) => photo.tile_ids?.includes(t.id)).slice(0, 3).map((t) => (
-                      <Link key={t.id} to={`/tile/${t.slug}`} className="text-xs bg-gold/10 text-gold px-2.5 py-1 rounded-full hover:bg-gold hover:text-white transition-colors">
-                        {t.name}
-                      </Link>
-                    ))}
-                  </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {photos.map((photo) => {
+              const caption = displayCaption(photo.caption);
+              const linkedTiles = tiles.filter((t) => photo.tile_ids?.includes(t.id)).slice(0, 3);
+              return (
+                <div
+                  key={photo.id}
+                  data-testid={`room-look-card-${photo.id}`}
+                  className="group bg-white border border-stone rounded-md overflow-hidden shadow-soft hover:shadow-md hover:-translate-y-1 transition-all duration-500 ease-out"
+                >
+                  <button onClick={() => setLightboxPhoto(photo)} className="relative block w-full aspect-[4/3] overflow-hidden bg-white">
+                    <img
+                      src={resolveImageUrl(photo.image.medium_url)}
+                      alt={photo.image.alt_text || caption || `${roomInfo.name} showroom display`}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {caption && (
+                      <span className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy/85 via-navy/40 to-transparent text-ivory text-xs sm:text-sm px-3 pt-8 pb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {caption}
+                      </span>
+                    )}
+                  </button>
+                  {linkedTiles.length > 0 && (
+                    <div className="p-3 flex flex-wrap gap-2">
+                      {linkedTiles.map((t) => (
+                        <Link
+                          key={t.id}
+                          to={`/tile/${t.slug}`}
+                          data-testid={`room-look-tile-chip-${t.slug}`}
+                          className="text-xs bg-gold/10 text-gold px-2.5 py-1 rounded-full hover:bg-gold hover:text-white transition-colors"
+                        >
+                          {t.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}
@@ -96,7 +113,7 @@ export default function RoomCategory() {
         {filteredTiles.length === 0 ? (
           <p className="text-ink/60 text-sm py-10" data-testid="no-tiles-message">No tiles found in this range yet. Check back soon or ask us on WhatsApp.</p>
         ) : (
-          <div className="grid gap-5 sm:gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
+          <div className="grid gap-6 sm:gap-8" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
             {filteredTiles.map((tile) => (
               <TileCard key={tile.id} tile={tile} />
             ))}

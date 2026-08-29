@@ -37,6 +37,14 @@ deep link pre-filled with tile name + SKU is the single highest-leverage detail.
 - Tested by testing_agent: 27/27 backend pytest tests pass, all critical frontend flows verified (100%). No blocking issues.
 - Admin credentials: siddharth.lalwani2024@vitstudent.ac.in / NirmanUdyog@2026 (in /app/memory/test_credentials.md)
 
+## What's Been Implemented (2026-08-29, navbar bug fix + gallery/comparison redesign)
+- FIXED navbar bug: removed the fragile scroll-based transparent-over-hero navbar state (was causing washed-out low-contrast text) — navbar is now unconditionally opaque ivory/navy on every page/scroll position.
+- Navbar redesign: logo + "Nirman Udyog" wordmark (gold italic "Udyog") shown together always, new "Enquire" WhatsApp CTA button, logo nudged right with margin. No Projects/Collections/Applications added (explicitly out of scope per user).
+- ComparisonBlock section recolored to Kajaria/cobalt blue bg with gold headings/labels, per user request.
+- Gallery + RoomCategory "See the look" redesigned to Pinterest/Houzz-style vertical cards (max 3 cols, gap-6/8, hover lift+zoom, gold room-tag pill, gradient caption overlay). Added `src/lib/caption.js` `displayCaption()` to hide the 71 generic boilerplate "(N)"-numbered captions while preserving the 5 real bedroom captions — regex `/\(\d+\)\s*$/`. RoomCategory "TILES USED" label replaced with interactive gold tile-name chips (only shown if real linked tiles exist).
+- Tested by testing_agent across 3 iterations (5 & 6): navbar fix, comparison colors, gallery/room-category redesign, caption filter all 100% verified, zero regressions, all 76 real demo photos confirmed untouched.
+
+## What's Been Implemented (2026-08-29, full rebrand + catalogue library)
 ## What's Been Implemented (2026-08-29, full rebrand + catalogue library)
 - Full rebrand per user's "master design spec" md doc: new tokens Navy #102A43 (brand/dark-section/primary-btn), Ivory #F5F2EC (page bg), Gold #B08A4A (accent/hover/badges), Stone #D9D5CC (borders), White (card surfaces), Ink #171A1C (body text, same token name reused with new hex — minimal-diff rename). Fonts: Cormorant Garamond (serif) + Manrope (sans), replacing Fraunces/Work Sans/IBM Plex Mono. Consolidated duplicate "cobalt" token into "kajaria" (real Kajaria-blue, restricted to TrustStrip + dealer badge only). Deliberately kept React CRA + FastAPI + Mongo stack rather than migrating to Next.js/TS (spec's suggested stack) — no user-visible benefit, high risk.
 - Navbar: transparent-over-hero on homepage top, ivory+blur on scroll/other pages. Hero: staggered fade-up motion timeline, slow bg zoom, auto-rotating multi-image slideshow with dots, new bottom "Premium Surfaces · Cooch Behar & Nearby · Design-Led Collections" metadata row.

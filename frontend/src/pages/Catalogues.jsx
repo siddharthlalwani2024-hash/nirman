@@ -36,7 +36,7 @@ export default function Catalogues() {
           </button>
         ))}
       </div>
-      <div className="grid gap-5 sm:gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
+      <div className="grid gap-6 sm:gap-8" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
         {filtered.map((c) => (
           <CatalogueCard key={c.id} catalogue={c} />
         ))}

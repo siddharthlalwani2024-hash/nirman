@@ -132,7 +132,7 @@ export default function Home() {
             <p className="text-gold text-sm font-bold tracking-widest uppercase mb-2">Shop by application</p>
             <h2 className="font-serif text-3xl sm:text-4xl text-ink">Designed around the way you live.</h2>
           </div>
-          <div className="grid gap-4 sm:gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))" }}>
+          <div className="grid gap-6 sm:gap-8" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(230px, 1fr))" }}>
             {roomCards.map((cat, idx) => (
               <Link
                 key={cat.slug}
@@ -215,7 +215,7 @@ export default function Home() {
                 <p className="text-gold text-sm font-bold tracking-widest uppercase mb-2">Handpicked</p>
                 <h2 className="font-serif text-3xl sm:text-4xl text-ink">Featured tiles</h2>
               </div>
-              <div className="grid gap-5 sm:gap-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
+              <div className="grid gap-6 sm:gap-8" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
                 {featured.map((tile) => (
                   <TileCard key={tile.id} tile={tile} />
                 ))}

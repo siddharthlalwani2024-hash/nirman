@@ -1,0 +1,24 @@
+{
+  "summary": "Narrow retest of the caption filter fix in /app/frontend/src/lib/caption.js (the single failing item from iteration_5). The regex was updated to /\\(\\d+\\)\\s*$/. Verified live at /gallery: 76 total demo-photo cards, exactly 5 carry a caption overlay in the DOM (all 5 room=bedroom, all with genuine unique captions like 'Textured wall tiling in the bedroom display...'), and 71 boilerplate cards (bathroom=18, kitchen=7, living=19, floor=16, wall=7, outdoor=4) render with NO caption span at all — only the gold room-tag pill remains. Zero leaks of the trailing '(N)' pattern were found. Filter chips (Bedroom / Bathroom / Living) confirmed: Bedroom -> 5/5 captions present, Bathroom -> 0/18, Living -> 0/19. Regression on /tiles/bedroom 'See the look': all 5 room-look-card-* cards show their real captions, no boilerplate leaks. Fix is fully verified; no regressions.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "displayCaption() in src/lib/caption.js is now correct and minimal — the /\\(\\d+\\)\\s*$/ pattern is a clean, robust hide rule that matches the seeded boilerplate '(N)' suffix and leaves genuine unique captions (bedroom set) untouched.",
+    "Consider extracting a small unit test for displayCaption() at src/lib/__tests__/caption.test.js to prevent future regressions (5 positive + 5 negative cases).",
+    "The caption overlay span is correctly conditional ({caption && ...}) in both DemoPhotoCard.jsx and RoomCategory.jsx, so the DOM is clean when caption is null — good for accessibility and screen readers."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not tested this session)", "frontend": "100% (all caption assertions pass: 5 retained, 71 hidden, 0 leaks, filter chips consistent, RoomCategory /tiles/bedroom retained all 5)"},
+  "test_credentials": "Not needed for this retest",
+  "seed_data_creation": "None. Existing 76 demo photos confirmed intact (bathroom=18, kitchen=7, living=19, floor=16, wall=7, outdoor=4, bedroom=5).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration_5's single failing item (generic caption leak) is now RESOLVED. Full app state is passing. Any future work should not need to re-verify caption filtering unless src/lib/caption.js changes.",
+  "rca of the issue": "Original bug: displayCaption regex matched only 'on display at our showroom' but seeded captions read '<Room> display at our showroom (N)', '<X> collection in our stockyard (N)', 'Showroom interior display (N)', etc. Fix: broadened regex to /\\(\\d+\\)\\s*$/ which hides any caption ending in a parenthesized number — matches all 71 boilerplate captions and preserves the 5 bedroom captions that lack that trailing pattern. Verified end-to-end on live preview URL."
+}

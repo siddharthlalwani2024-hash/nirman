@@ -1,23 +1,13 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
+import { useState } from "react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { ROOMS } from "../../constants/rooms";
 import { useSettings } from "../../context/SettingsContext";
+import { buildWhatsAppLink, generalInquiryMessage } from "../../lib/whatsapp";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const settings = useSettings();
-  const location = useLocation();
-  const isHome = location.pathname === "/";
-  const transparent = isHome && !scrolled && !open;
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [location.pathname]);
 
   const links = [
     { to: "/", label: "Home" },
@@ -29,23 +19,18 @@ export function Navbar() {
     { to: "/contact", label: "Contact" },
   ];
 
+  const enquireLink = settings?.whatsapp_number ? buildWhatsAppLink(settings.whatsapp_number, generalInquiryMessage()) : null;
+
   return (
-    <header
-      className={`sticky top-0 z-40 transition-all duration-500 ${
-        transparent ? "bg-transparent border-b border-transparent" : "bg-ivory/95 backdrop-blur-md border-b border-stone"
-      }`}
-    >
+    <header className="sticky top-0 z-40 bg-ivory/95 backdrop-blur-md border-b border-stone">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16 lg:h-20">
-        <Link to="/" data-testid="navbar-logo" className="flex items-center gap-2.5 font-serif text-xl lg:text-2xl tracking-tight">
-          {settings?.logo_url ? (
-            <img src={settings.logo_url} alt="Nirman Udyog logo" className="h-14 lg:h-16 w-auto object-contain" />
-          ) : (
-            <span className={transparent ? "text-white" : "text-ink"}>
-              Nirman <span className="text-gold">Udyog</span>
-            </span>
-          )}
+        <Link to="/" data-testid="navbar-logo" className="flex items-center gap-2.5 ml-1 sm:ml-3 shrink-0">
+          {settings?.logo_url && <img src={settings.logo_url} alt="Nirman Udyog logo" className="h-11 lg:h-12 w-auto object-contain" />}
+          <span className="font-serif text-xl lg:text-2xl tracking-tight text-ink whitespace-nowrap">
+            Nirman <span className="italic text-gold">Udyog</span>
+          </span>
         </Link>
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-5 overflow-x-auto">
           {links.map((l) => (
             <NavLink
               key={l.to}
@@ -53,8 +38,8 @@ export function Navbar() {
               end={l.to === "/"}
               data-testid={`nav-link-${l.label.toLowerCase()}`}
               className={({ isActive }) =>
-                `group relative text-sm font-medium tracking-wide py-1 transition-colors ${
-                  isActive ? "text-gold" : transparent ? "text-white hover:text-gold" : "text-ink hover:text-gold"
+                `group relative text-sm font-medium tracking-wide py-1 whitespace-nowrap transition-colors ${
+                  isActive ? "text-gold" : "text-ink hover:text-gold"
                 }`
               }
             >
@@ -71,12 +56,20 @@ export function Navbar() {
             </NavLink>
           ))}
         </nav>
-        <button
-          data-testid="mobile-menu-toggle"
-          className={transparent ? "lg:hidden text-white" : "lg:hidden text-ink"}
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
+        <div className="hidden lg:flex items-center shrink-0">
+          {enquireLink && (
+            <a
+              href={enquireLink}
+              target="_blank"
+              rel="noreferrer"
+              data-testid="navbar-enquire-button"
+              className="flex items-center gap-2 bg-navy text-white text-sm font-medium px-5 py-2.5 rounded-sm hover:bg-gold transition-colors duration-200"
+            >
+              <MessageCircle size={16} /> Enquire
+            </a>
+          )}
+        </div>
+        <button data-testid="mobile-menu-toggle" className="lg:hidden text-ink" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
@@ -94,6 +87,17 @@ export function Navbar() {
               {l.label}
             </NavLink>
           ))}
+          {enquireLink && (
+            <a
+              href={enquireLink}
+              target="_blank"
+              rel="noreferrer"
+              data-testid="mobile-navbar-enquire-button"
+              className="flex items-center justify-center gap-2 bg-navy text-white text-sm font-medium px-5 py-3 rounded-sm mt-4"
+            >
+              <MessageCircle size={16} /> Enquire
+            </a>
+          )}
         </div>
       )}
     </header>

@@ -11,15 +11,15 @@ const ROWS = [
 
 export function ComparisonBlock() {
   return (
-    <section className="bg-white py-16 sm:py-24" data-testid="comparison-block">
+    <section className="bg-kajaria py-16 sm:py-24" data-testid="comparison-block">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <Reveal>
           <p className="text-gold text-sm font-bold tracking-widest uppercase mb-2">The difference</p>
-          <h2 className="font-serif text-3xl sm:text-4xl text-ink mb-10">Why buy from an authorized dealer</h2>
+          <h2 className="font-serif text-3xl sm:text-4xl text-ivory mb-10">Why buy from an authorized dealer</h2>
         </Reveal>
         <Reveal delay={0.08}>
           <div className="bg-ivory rounded-md border border-stone overflow-hidden shadow-soft">
-            <div className="grid grid-cols-[1fr_auto_auto] sm:grid-cols-[1fr_140px_140px] text-xs sm:text-sm font-semibold uppercase tracking-wide text-ink/60 border-b border-stone px-4 sm:px-6 py-3">
+            <div className="grid grid-cols-[1fr_auto_auto] sm:grid-cols-[1fr_140px_140px] text-xs sm:text-sm font-semibold uppercase tracking-wide text-gold border-b border-stone px-4 sm:px-6 py-3">
               <span></span>
               <span className="text-center">Nirman Udyog</span>
               <span className="text-center">Typical shop</span>

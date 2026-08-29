@@ -49,7 +49,7 @@ export default function Gallery() {
           </button>
         ))}
       </div>
-      <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))" }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
         {filtered.map((photo, i) => (
           <DemoPhotoCard key={photo.id} photo={photo} onClick={() => openLightbox(i)} />
         ))}

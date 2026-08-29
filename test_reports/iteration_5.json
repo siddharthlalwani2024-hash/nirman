@@ -1,0 +1,35 @@
+{
+  "summary": "Deep automated pass over navbar bug fix + Kajaria-blue comparison redesign + Gallery/RoomCategory Pinterest-style redesign for Nirman Udyog. Verified navbar visual stability at scroll-top vs after-scroll (no flicker/washed-out), logo+wordmark presence, Enquire CTA WhatsApp integration (desktop + mobile), absence of Projects/Collections/Applications links, mobile hamburger flow, Comparison block cobalt-blue bg, Gallery 3-col grid + lightbox open, RoomCategory 'See the look' redesign, and demo-photos regression (all 76 photos present with correct per-room counts). 35/37 assertions passed. One real bug found: generic boilerplate captions like 'Living room display at our showroom (N)' and 'Marble slab collection in our stockyard (N)' still leak through the displayCaption() filter and render on hover in Gallery+RoomCategory cards — the regex in /app/frontend/src/lib/caption.js only strips 'on display at our showroom' (with the leading 'on'), but the actual DB captions are '<Room> display at our showroom (N)' and '<X> collection in our stockyard (N)'. The other assertion that flagged FAIL (nav-link-home color = gold at homepage top) is a false alarm — Home is the ACTIVE link on '/' so gold is the intended active state; non-active links (Bathroom, etc.) render rgb(23,26,28) dark ink as required. Navbar bug is fully fixed.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "DemoPhotoCard / displayCaption()",
+        "issue": "Generic boilerplate captions still show on hover because regex only matches 'on display at our showroom'. Actual DB captions read '<Room> display at our showroom (N)' (no 'on'), '<X> collection in our stockyard (N)', 'Showroom interior display (N)' etc. All 50+ generic photos are affected in Gallery — hover reveals captions like 'Living room display at our showroom (11)', 'Granite slab collection in our stockyard (12)', 'Kitchen tile display at our showroom (5)'. Task explicitly required these '(N)' numbered/boilerplate captions to be hidden.",
+        "selector": "src/lib/caption.js",
+        "priority": "HIGH"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Broaden generic-caption filter in /app/frontend/src/lib/caption.js. Suggested: strip anything matching /display at (our )?showroom/i OR /collection in (our )?stockyard/i OR /showroom interior display/i OR anything ending in ' \\(\\d+\\)$'. Simplest robust rule: hide any caption ending in ' (N)' number-in-parens pattern, since real unique captions (the 5 bedroom ones) don't have that pattern."
+  ],
+  "critical_code_review_comments": [
+    "Navbar.jsx correctly removes the scroll-transparent isHome logic — root cause of the reported bug is gone. Header is unconditionally sticky+ivory+opaque. Good.",
+    "displayCaption() regex is too narrow — should match the actual seeded caption patterns, not an assumed 'on display' prefix.",
+    "Nav row at 1280px viewport: 13 links + logo + Enquire is TIGHT but does not visually overflow (overflow-x-auto guard on the <nav>). At 1440px fits comfortably.",
+    "DemoPhotoCard: caption span still renders in the DOM even when displayCaption() returns null — actually it doesn't (guarded by `{caption && ...}`), good.",
+    "Consider adding data-testid to the Lightbox close/prev/next buttons for cleaner automated tests (currently discovered via aria-label heuristic)."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not tested this session, backend unchanged)", "frontend": "97% (35/37 assertions; 1 false-positive on active-link gold, 1 real caption filter bug)"},
+  "test_credentials": "admin: siddharth.lalwani2024@vitstudent.ac.in / NirmanUdyog@2026 (not exercised this session — no backend changes)",
+  "seed_data_creation": "None. Verified existing 76 demo photos intact: bathroom=18, kitchen=7, living=19, floor=16, wall=7, outdoor=4, bedroom=5.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Navbar bug fix + comparison block + Gallery/RoomCategory redesigns are visually and functionally correct. The only remaining bug is the caption filter — after main agent broadens the regex in src/lib/caption.js, re-verify by loading /gallery and hovering cards: only the 5 bedroom photos with real unique captions ('Textured wall tiling...', etc.) should reveal caption text; every 'X display at our showroom (N)' / 'X collection in our stockyard (N)' / 'Showroom interior display (N)' card should show NO caption overlay on hover. Regression: confirm /tiles/bedroom 'See the look' still shows the 5 real captions on hover.",
+  "rca of the issue": "displayCaption() in src/lib/caption.js uses /on display at our showroom/i but the actual DB captions do not start with 'on'. Result: boilerplate captions leak through the filter and appear on hover as gradient overlay text, violating the design intent stated in the review request that 'generic-captioned photos should show NO caption text, just the room tag'. Reproduction: open /gallery, hover any card whose photo id maps to a Living/Kitchen/Floor/Wall/Outdoor photo — caption overlay fades in with text like 'Living room display at our showroom (11)'. Mitigation: replace the regex with a stricter multi-pattern check or hide any caption ending in ' (\\d+)'."
+}
